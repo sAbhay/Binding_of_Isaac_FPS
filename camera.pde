@@ -1,5 +1,15 @@
-void mouseLook()
+class Camera extends QueasyCam 
 {
-  cam.pan(radians((mouseX - pmouseX)/2.000));
-  cam.tilt(radians((mouseY - pmouseY)/2.000));
+  Camera(PApplet applet)
+  {
+    super(applet);
+  }
+  
+  void setPosition(PVector pos)
+  {
+    position = pos;
+        cam.velocity  = new PVector(0,0);
+  }
+  
+  
 }
