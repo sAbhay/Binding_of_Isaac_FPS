@@ -1,24 +1,28 @@
 import queasycam.*;
 
-Camera cam;
+QueasyCam cam;
 
 Player player;
 
-boolean upPressed, downPressed, leftPressed, rightPressed;
-
 PVector target;
+
+ArrayList<Bullet> b = new ArrayList<Bullet>();
 
 void setup() 
 {
   fullScreen(P3D);
   strokeWeight(2);
 
-  cam = new Camera(this);
+  cam = new QueasyCam(this);
   player = new Player();
+
+  cam.speed = 1;
+  
+  target = new PVector();
 }
 
 void draw() 
-{
+{ 
   background(0);
 
   stroke(255);
@@ -28,65 +32,21 @@ void draw()
   cam.position.y = player.pos.y;
   
   target = cam.getForward();
-  
+
   pushMatrix();
-  
+
   translate(target.x, target.y, target.z);
   sphere(75);
-  
+
   popMatrix();
-}
 
-void keyPressed()
-{
-  if (key == 't')
+  for (int i = 0; i < b.size(); i++)
   {
-    upPressed = true;
-  }
-
-  if (key == 'f')
-  {
-    leftPressed = true;
-  }
-
-  if (key == 'g')
-  {
-    downPressed = true;
-  }
-
-  if (key == 'h')
-  {
-    rightPressed = true;
+    b.get(i).update();
   }
 }
 
-void keyReleased()
+void mousePressed()
 {
-  if (key == 't')
-  {
-    upPressed = false;
-  }
-
-  if (key == 'f')
-  {
-    leftPressed = false;
-  }
-
-  if (key == 'g')
-  {
-    downPressed = false;
-  }
-
-  if (key == 'h')
-  {
-    rightPressed = false;
-  }
-}
-
-void playerMove()
-{
-  if (upPressed) player.forward();
-  if (downPressed) player.back();
-  if (leftPressed) player.left();
-  if (rightPressed) player.right();
+  b.add(new Bullet(cam.position, target, 10, color(255, 0, 0)));
 }
