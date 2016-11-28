@@ -5,12 +5,18 @@ class Bullet
 
   float speed;
   float size;
-  
+
   color colour;
 
-  Bullet(PVector _start, PVector _target, float _speed, color _colour)
+  float range;
+
+  PVector start;
+  
+  boolean isAlive;
+
+  Bullet(PVector _start, PVector _target, float _speed, color _colour, float _range, float _tearSize)
   {
-    size = 5; 
+    size = _tearSize; 
     speed = _speed;
 
     pos = new PVector(_start.x, _start.y, _start.z); // _start determines the spawn point
@@ -20,8 +26,12 @@ class Bullet
 
     dir.normalize();
     dir.mult(-speed);
-    
+
     colour = _colour;
+
+    range = _range;
+
+    start = _start;
   }
 
   void display()
@@ -40,10 +50,25 @@ class Bullet
   {
     pos.add(dir); // causes the bullet to move towards the target every tick
   }
-  
+
   void update()
   {
-   display();
-   move();
+    display();
+    move();
+  }
+
+  boolean outOfRange()
+  {
+    if (dist(start.x, start.y, start.z, pos.x, pos.y, pos.z) > range)
+    {
+      return true;
+    }
+
+    return false;
+  }
+  
+  boolean hitEnemy()
+  {
+    return false; 
   }
 }

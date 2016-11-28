@@ -1,29 +1,50 @@
 class Player
 {
-  PVector pos;
-  
-  Player()
+  private PVector pos;
+
+  private float size;
+  private float damage;
+  private float speed;
+  private float shotSpeed;
+  private float tears;
+  private float range;
+  private float tearSize;
+
+  private ArrayList<Bullet> b = new ArrayList<Bullet>();
+
+  Player(float _size, float _damage, float _speed, float _shotSpeed, float _tears, float _range, float _tearSize)
   {
-    pos = new PVector(0, 0, 0);
-  }
-  
-  void right()
-  {
-      pos.x += 2;
+    size = _size;
+    damage = _damage;
+    speed = _speed;
+    shotSpeed = _shotSpeed;
+    tears = _tears;
+    range = _range;
+    tearSize = _tearSize;
+    
+    pos = new PVector(0, -size, 0);
   }
 
-  void left()
+  void shoot()
   {
-      pos.x -= 2;
+    b.add(new Bullet(cam.position, target, 10, color(255, 0, 0), 100, 10));
   }
 
-  void forward()
+  void update()
   {
-      pos.z -= 2;
+    for (int i = 0; i < b.size(); i++)
+    {
+      b.get(i).update();
+
+      if (b.get(i).outOfRange())
+      {
+        b.remove(i);
+      }
+    }
   }
 
-  void back()
+  PVector getPos()
   {
-      pos.z += 2;
+    return pos;
   }
 }
