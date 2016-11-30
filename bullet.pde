@@ -1,7 +1,7 @@
 class Bullet
 {
-  PVector pos;
-  PVector dir;
+  public PVector pos;
+  private PVector dir;
 
   float speed;
   float size;
@@ -11,7 +11,7 @@ class Bullet
   float range;
 
   PVector start;
-  
+
   boolean isAlive;
 
   Bullet(PVector _start, PVector _target, float _speed, color _colour, float _range, float _tearSize)
@@ -66,9 +66,19 @@ class Bullet
 
     return false;
   }
-  
+
   boolean hitEnemy()
   {
-    return false; 
+    return false;
+  }
+
+  boolean outOfBounds()
+  {
+    if (pos.x < -roomSize.x/2 || pos.x > roomSize.x/2 || pos.z > roomSize.z/2 || pos.z < -roomSize.x/2 || pos.y < -roomSize.y/2 || pos.y > roomSize.z/2) // checks whether its position lies outside the space
+    {
+      return true;
+    }
+
+    return false;
   }
 }
