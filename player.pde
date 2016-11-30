@@ -29,7 +29,7 @@ class Player
 
   void shoot()
   {
-    b.add(new Bullet(cam.position, target, 10, color(255, 0, 0), range, 10));
+    b.add(new Bullet(cam.position, target, 10, color(255, 0, 0), range, 5, 1));
   }
 
   void update()

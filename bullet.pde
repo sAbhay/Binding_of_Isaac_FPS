@@ -14,7 +14,9 @@ class Bullet
 
   boolean isAlive;
 
-  Bullet(PVector _start, PVector _target, float _speed, color _colour, float _range, float _tearSize)
+  PShape tear;
+
+  Bullet(PVector _start, PVector _target, float _speed, color _colour, float _range, float _tearSize, int _textureNo)
   {
     size = _tearSize; 
     speed = _speed;
@@ -32,6 +34,10 @@ class Bullet
     range = _range;
 
     start = _start;
+
+    noStroke();
+    tear = createShape(SPHERE, size);
+    tear.setTexture(texture[_textureNo]);
   }
 
   void display()
@@ -39,9 +45,7 @@ class Bullet
     pushMatrix();
 
     translate(pos.x, pos.y, pos.z); // draws bullets at pos
-    noStroke();
-    fill(colour);
-    sphere(size);
+    shape(tear);
 
     popMatrix();
   }
