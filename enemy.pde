@@ -13,8 +13,9 @@ class Enemy // base enemy class
   boolean killed = false;
   
   float health;
+  float damage;
 
-  Enemy(PVector _pos, float _speed, PVector _size, int _textureNo, int _health)
+  Enemy(PVector _pos, float _speed, PVector _size, int _textureNo, float _health, float _damage)
   {
     start = _pos;
     pos = _pos;
@@ -29,6 +30,7 @@ class Enemy // base enemy class
     enemy.setTexture(texture[_textureNo]);
     
     health = _health;
+    damage = _damage;
   }
 
   void display()
