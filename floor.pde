@@ -1,8 +1,8 @@
 class Floor
 {
-  int map[][] = {{1, 0, 0}, 
-    {1, 1, 1}, 
-    {0, 1, 0}};
+  int map[][] = {{0, 1, 0}, 
+                 {1, 1, 1}, 
+                 {0, 1, 0}};
 
   ArrayList<Room> r = new ArrayList<Room>();
 
@@ -14,6 +14,7 @@ class Floor
       {
         if (map[i][j] == 1)
         {
+          //r.add(new Room(new PVector(-i*roomSize.x, 0, j*roomSize.z), j, i));
           r.add(new Room(new PVector(0, 0, 0), j, i));
         }
       }
@@ -25,6 +26,7 @@ class Floor
     for (int i = 0; i < r.size(); i++)
     {
       if (r.get(i).playerInside()) r.get(i).display();
+      //r.get(i).display();
 
       if (r.get(i).indexUp == pru && r.get(i).indexSide == prs)
       {
@@ -36,7 +38,7 @@ class Floor
           }
         }
         
-        if (pru < 3)
+        if (pru < map.length - 1)
         {
           if (map[pru+1][prs] == 1)
           {
@@ -52,9 +54,9 @@ class Floor
           }
         }
         
-        if (prs < 3)
+        if (prs < map[0].length - 1)
         {
-          if (map[pru][prs + 1] == 1)
+          if (map[pru][prs+1] == 1)
           {
             r.get(i).d[3].isActive = true;
           }
