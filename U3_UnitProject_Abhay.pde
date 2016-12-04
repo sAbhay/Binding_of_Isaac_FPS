@@ -12,11 +12,13 @@ PVector roomSize = new PVector(1000, 500, 1000);
 
 PImage texture[] = new PImage[2];
 
-PImage roomTexture[] = new PImage[2];
+PImage roomTexture[] = new PImage[1];
+
+PImage doorTexture[] = new PImage[2];
 
 Floor floor;
 
-int pru = 1; // player room up, determines which the first value of the room the player is in in the 2D array map
+int pru = 0; // player room up, determines which the first value of the room the player is in in the 2D array map
 int prs = 1; // player room side, determines which the second value of the room the player is in in the 2D array map
 
 int time;
@@ -35,6 +37,9 @@ void setup()
   texture[1] = loadImage("blueTear.png");
 
   roomTexture[0] = loadImage("floor.png");
+  
+  doorTexture[0] = loadImage("closedDoor.png");
+  doorTexture[1] = loadImage("openDoor.png");
 
   floor = new Floor();
 

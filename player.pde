@@ -68,12 +68,12 @@ class Player
   void checkBoundaries()
   {
     //keeping the player inside the room
-    if (cam.position.x <= -roomSize.x/2 + 20) cam.position.x = -roomSize.x/2 + 20;
-    if (cam.position.x >= roomSize.x/2 - 20) cam.position.x = roomSize.x/2 - 20;
-    if (cam.position.y <= -roomSize.y/2 + 20) cam.position.y = -roomSize.x/2 + 20;
-    if (cam.position.y >= roomSize.y/2 - 20) cam.position.y = roomSize.x/2 - 20;
-    if (cam.position.z <= -roomSize.z/2 + 20) cam.position.z = -roomSize.x/2 + 20;
-    if (cam.position.z >= roomSize.z/2 - 20) cam.position.z = roomSize.x/2 - 20;
+    if (cam.position.x <= -roomSize.x/2 + 10) cam.position.x = -roomSize.x/2 + 10;
+    if (cam.position.x >= roomSize.x/2 - 10) cam.position.x = roomSize.x/2 - 10;
+    if (cam.position.y <= -roomSize.y/2 + 10) cam.position.y = -roomSize.x/2 + 10;
+    if (cam.position.y >= roomSize.y/2 - 10) cam.position.y = roomSize.x/2 - 10;
+    if (cam.position.z <= -roomSize.z/2 + 10) cam.position.z = -roomSize.x/2 + 10;
+    if (cam.position.z >= roomSize.z/2 - 10) cam.position.z = roomSize.x/2 - 10;
   }
 
   PVector getPos()

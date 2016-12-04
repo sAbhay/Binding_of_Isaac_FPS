@@ -1,7 +1,5 @@
 class Room
-{
-  PVector pos;
-
+{ 
   PShape[] fw = new PShape[3]; // floors and walls
 
   int indexUp, indexSide;
@@ -10,9 +8,8 @@ class Room
 
   ArrayList<RedFly> rf = new ArrayList<RedFly>();
 
-  Room(PVector _pos, int _indexUp, int _indexSide)
+  Room(int _indexUp, int _indexSide)
   {
-    pos = _pos;
     indexUp = _indexUp;
     indexSide = _indexSide;
 
@@ -41,51 +38,46 @@ class Room
     noFill();
     stroke(255);
 
-    pushMatrix();
-
-    translate(pos.x, pos.y, pos.z);
     box(roomSize.x, roomSize.y, roomSize.z);
 
-    popMatrix();
-
     pushMatrix();
 
-    translate(pos.x, pos.y + roomSize.y/2, pos.z);
+    translate(0, roomSize.y/2, 0);
     shape(fw[0]);
 
     popMatrix();
 
     pushMatrix();
 
-    translate(pos.x, pos.y - roomSize.y/2, pos.z);
+    translate(0, -roomSize.y/2, 0);
     shape(fw[0]);
 
     popMatrix();
-
+    
     pushMatrix();
 
-    translate(pos.x, pos.y, pos.z - roomSize.z/2);
+    translate(0, 0, -roomSize.z/2);
     shape(fw[1]);
 
     popMatrix();
-
+    
     pushMatrix();
 
-    translate(pos.x, pos.y, pos.z + roomSize.z/2);
+    translate(0, 0, roomSize.z/2);
     shape(fw[1]);
 
     popMatrix();
-
+    
     pushMatrix();
 
-    translate(pos.x - roomSize.x/2, pos.y, pos.z);
+    translate(-roomSize.x/2, 0, 0);
     shape(fw[2]);
 
     popMatrix();
-
+    
     pushMatrix();
 
-    translate(pos.x + roomSize.x/2, pos.y, pos.z);
+    translate(roomSize.x/2, 0, 0);
     shape(fw[2]);
 
     popMatrix();
@@ -108,7 +100,7 @@ class Room
       }
     }
 
-    text(indexSide + ", " + indexUp, pos.x, pos.y, pos.z);
+    text(indexSide + ", " + indexUp, 0, 0, 0);
 
     for (int i = 0; i < rf.size(); i++)
     { 

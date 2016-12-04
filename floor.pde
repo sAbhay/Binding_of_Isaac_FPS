@@ -15,7 +15,7 @@ class Floor
         if (map[i][j] == 1)
         {
           //r.add(new Room(new PVector(-i*roomSize.x, 0, j*roomSize.z), j, i));
-          r.add(new Room(new PVector(0, 0, 0), j, i));
+          r.add(new Room(j, i));
         }
       }
     }

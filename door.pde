@@ -5,10 +5,24 @@ class Door
   boolean open;
   boolean isActive;
 
+  PShape door[] = new PShape[4];
+
   Door(PVector _pos, int _type)
   {
     pos = _pos;
     type = _type;
+
+    door[0] = createShape(BOX, roomSize.x/5, roomSize.y/2, 20);
+    door[1] = createShape(BOX, roomSize.x/5, roomSize.y/2, 20);
+
+    door[2] = createShape(BOX, 20, roomSize.y/2, roomSize.z/5);
+    door[3] = createShape(BOX, 20, roomSize.y/2, roomSize.z/5);
+
+    door[0].setTexture(doorTexture[0]);
+    door[1].setTexture(doorTexture[1]);
+
+    door[2].setTexture(doorTexture[0]);
+    door[3].setTexture(doorTexture[1]);
   }
 
   void display()
@@ -19,7 +33,15 @@ class Door
 
       pushMatrix();
       translate(pos.x, pos.y, pos.z);
-      box(roomSize.x/5, roomSize.y/2, 20);
+
+      if (open) 
+      {
+        shape(door[1]);
+      } else 
+      {
+        shape(door[0]);
+      }
+
       popMatrix();
 
       break;
@@ -28,7 +50,15 @@ class Door
 
       pushMatrix();
       translate(pos.x, pos.y, pos.z);
-      box(roomSize.x/5, roomSize.y/2, 20);
+
+      if (open) 
+      {
+        shape(door[1]);
+      } else 
+      {
+        shape(door[0]);
+      }
+
       popMatrix();
 
       break;
@@ -37,7 +67,15 @@ class Door
 
       pushMatrix();
       translate(pos.x, pos.y, pos.z);
-      box(20, roomSize.y/2, roomSize.z/5);
+
+      if (open)
+      {
+        shape(door[3]);
+      } else
+      {
+        shape(door[2]);
+      }
+
       popMatrix();
 
       break;
@@ -46,9 +84,17 @@ class Door
 
       pushMatrix();
       translate(pos.x, pos.y, pos.z);
-      box(20, roomSize.y/2, roomSize.z/5);
-      popMatrix();
       
+      if (open)
+      {
+        shape(door[3]);
+      } else
+      {
+        shape(door[2]);
+      }
+      
+      popMatrix();
+
       break;
     }
   }

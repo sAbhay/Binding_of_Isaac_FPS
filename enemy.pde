@@ -51,6 +51,13 @@ class Enemy // base enemy class
       {
         player.b.remove(i);
         health--;
+        
+        dir.mult(50);
+        pos.sub(dir);
+        
+        dir.normalize();
+        dir.mult(speed);
+        pos.add(dir);
       }
     }
     
