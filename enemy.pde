@@ -14,6 +14,8 @@ class Enemy // base enemy class
   
   float health;
   float damage;
+  
+  ArrayList<Bullet> b = new ArrayList<Bullet>();
 
   Enemy(PVector _pos, float _speed, PVector _size, int _textureNo, float _health, float _damage)
   {
@@ -50,7 +52,7 @@ class Enemy // base enemy class
       if (player.b.get(i).pos.z >= pos.z - size.z/2 && player.b.get(i).pos.z <= pos.z + size.z/2 && player.b.get(i).pos.x >= pos.x - size.x/2 && player.b.get(i).pos.x <= pos.x + size.x/2 && player.b.get(i).pos.y >= pos.y - size.y/2 && player.b.get(i).pos.y <= pos.y + size.y/2)
       {
         player.b.remove(i);
-        health--;
+        health -= player.damage;
         
         dir.mult(50);
         pos.sub(dir);

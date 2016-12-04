@@ -33,13 +33,13 @@ class Player
 
   void shoot()
   {
-    b.add(new Bullet(cam.position, target, 10, color(255, 0, 0), range, 5, 1));
+    b.add(new Bullet(cam.position, target, shotSpeed, range, 5, 1));
   }
 
   void update()
   {
     checkBoundaries();
-    
+
     target = PVector.add(cam.position, cam.getForward());
 
     for (int i = 0; i < b.size(); i++)
@@ -74,6 +74,18 @@ class Player
     if (cam.position.y >= roomSize.y/2 - 10) cam.position.y = roomSize.x/2 - 10;
     if (cam.position.z <= -roomSize.z/2 + 10) cam.position.z = -roomSize.x/2 + 10;
     if (cam.position.z >= roomSize.z/2 - 10) cam.position.z = roomSize.x/2 - 10;
+  }
+
+  void checkIfShot(Enemy enemy)
+  {
+    for (int i = 0; i < enemy.b.size(); i++)
+    {
+      if (enemy.b.get(i).pos.z >= pos.z - size.z/2 && enemy.b.get(i).pos.z <= pos.z + size.z/2 && enemy.b.get(i).pos.x >= pos.x - size.x/2 && enemy.b.get(i).pos.x <= pos.x + size.x/2 && enemy.b.get(i).pos.y >= pos.y - size.y/2 && enemy.b.get(i).pos.y <= pos.y + size.y/2)
+      {
+        enemy.b.remove(i);
+        health -= enemy.damage;
+      }
+    }
   }
 
   PVector getPos()

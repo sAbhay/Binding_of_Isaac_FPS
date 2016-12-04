@@ -16,7 +16,7 @@ class Bullet
 
   PShape tear;
 
-  Bullet(PVector _start, PVector _target, float _speed, color _colour, float _range, float _tearSize, int _textureNo)
+  Bullet(PVector _start, PVector _target, float _speed, float _range, float _tearSize, int _textureNo)
   {
     size = _tearSize; 
     speed = _speed;
@@ -28,8 +28,6 @@ class Bullet
 
     dir.normalize();
     dir.mult(-speed);
-
-    colour = _colour;
 
     range = _range;
 
@@ -68,11 +66,6 @@ class Bullet
       return true;
     }
 
-    return false;
-  }
-
-  boolean hitEnemy()
-  {
     return false;
   }
 

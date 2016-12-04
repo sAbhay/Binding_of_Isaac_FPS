@@ -10,7 +10,7 @@ boolean shooting;
 
 PVector roomSize = new PVector(1000, 500, 1000);
 
-PImage texture[] = new PImage[2];
+PImage texture[] = new PImage[4];
 
 PImage roomTexture[] = new PImage[1];
 
@@ -18,8 +18,8 @@ PImage doorTexture[] = new PImage[2];
 
 Floor floor;
 
-int pru = 0; // player room up, determines which the first value of the room the player is in in the 2D array map
-int prs = 1; // player room side, determines which the second value of the room the player is in in the 2D array map
+int prs = 0; // player room up, determines which the first value of the room the player is in in the 2D array map
+int pru = 1; // player room side, determines which the second value of the room the player is in in the 2D array map
 
 int time;
 
@@ -29,12 +29,14 @@ void setup()
   noStroke();
 
   cam = new QueasyCam(this);
-  player = new Player(new PVector(100, 200, 100), 0, 0, 0, 500, 1000, 0, 6);
+  player = new Player(new PVector(100, 200, 100), 1, 2, 10, 500, 1000, 0, 6);
 
-  cam.speed = 2;
+  cam.speed = player.speed;
 
   texture[0] = loadImage("redfly.png");
-  texture[1] = loadImage("blueTear.png");
+  texture[1] = loadImage("tear.png");
+  texture[2] = loadImage("bloodTear.png");
+  texture[3] = loadImage("pooter.png");
 
   roomTexture[0] = loadImage("floor.png");
   
@@ -60,21 +62,28 @@ void draw()
 
   player.update();
 
-  println(pru + ", ", prs);
+  println(prs + ", ", pru);
 
-  if (player.health <= 0) background(255, 0, 0);
+  if (player.health <= 0) background(255, 0, 0); //<>//
 
   for (int i = 0; i < player.health; i++)
   {
     PVector forward = player.getTarget();
-
+    
     pushMatrix();
 
     translate(forward.x, forward.y, forward.z);
-    fill(255, 0, 0, 20);
+    
+    pushMatrix();
+    
+    translate(i*0.1 - 0.5, -0.4, 0);
+    
+    fill(255, 0, 0, 100);
     noStroke();
-    box(i * 0.01, i * 0.01, i * 0.01);
+    box(0.06);
 
+    popMatrix();
+    
     popMatrix();
   }
 
