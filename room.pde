@@ -8,13 +8,20 @@ class Room
 
   ArrayList<RedFly> rf = new ArrayList<RedFly>();
   ArrayList<Pooter> p = new ArrayList<Pooter>();
-  
+
   int enemyCount;
 
-  Room(int _indexUp, int _indexSide)
+  ArrayList<Heart> h = new ArrayList<Heart>();
+
+  int type;
+  int drop;
+
+  Room(int _indexUp, int _indexSide, int _type)
   {
     indexUp = _indexUp;
     indexSide = _indexSide;
+
+    type = _type;
 
     fw[0] = createShape(BOX, roomSize.x, 2, roomSize.z);
     fw[1] = createShape(BOX, roomSize.x, roomSize.y, 2);
@@ -30,21 +37,41 @@ class Room
       fw[i].setTexture(roomTexture[0]);
     }
 
-    int numberOfEnemies = (int) random(5, 15);
-    
-    enemyCount = numberOfEnemies;
-    
-    int nrf = (int) random(5, 10); // number of red flies
-    int np = numberOfEnemies - nrf;
-    
+    switch(type)
+    {
+    case 1:
+      enemyCount = (int) random(5, 10);
+
+      drop = (int) random(20);
+      if (drop < 6) 
+      {
+        h.add(new Heart(0));
+      } else if (drop > 6 && drop <= 9) 
+      {
+        h.add(new Heart(1));
+      } else if (drop == 10) 
+      {
+        h.add(new Heart(2));
+      }
+      break;
+
+    case 2:
+      enemyCount = 0;
+      break;
+    }
+
+    float ratio = random(0.33, 0.66);
+    int nrf = (int) (ratio * enemyCount); // number of red flies
+    int np = (int) ((1 - ratio) * enemyCount);
+
     for (int i = 0; i < nrf; i++)
     {
-      rf.add(new RedFly(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(20, 20, 20), 0, 2, 1));
+      rf.add(new RedFly(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 0, 2, 1));
     }
-    
+
     for (int i = 0; i < np; i++)
     {
-      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(20, 20, 20), 3, 2, 1, 2000));
+      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(40, 40, 40), 3, 2, 1, 2000));
     }
   }
 
@@ -68,28 +95,28 @@ class Room
     shape(fw[0]);
 
     popMatrix();
-    
+
     pushMatrix();
 
     translate(0, 0, -roomSize.z/2);
     shape(fw[1]);
 
     popMatrix();
-    
+
     pushMatrix();
 
     translate(0, 0, roomSize.z/2);
     shape(fw[1]);
 
     popMatrix();
-    
+
     pushMatrix();
 
     translate(-roomSize.x/2, 0, 0);
     shape(fw[2]);
 
     popMatrix();
-    
+
     pushMatrix();
 
     translate(roomSize.x/2, 0, 0);
@@ -99,22 +126,34 @@ class Room
 
     enemyCount = rf.size() + p.size();
 
-    for (int i = 0; i < d.length; i++)
-    {
-      if (enemyCount <= 0)
+      for (int i = 0; i < d.length; i++)
       {
-        d[i].open = true;
+        if (enemyCount <= 0)
+        {
+          d[i].open = true;
+          
+          for(int j = 0; j < h.size(); j++)
+          {
+            h.get(j).isActive = true; 
+          }
+        }
+
+        if (d[i].isActive)
+        {
+          d[i].display();
+        }
+
+        if (d[i].isActive && d[i].open)
+        {
+          d[i].update();
+        }
       }
 
-      if (d[i].isActive)
-      {
-        d[i].display();
-      }
-      
-      if (d[i].isActive && d[i].open)
-      {
-        d[i].update();
-      }
+    for (int i = 0; i < h.size(); i++)
+    {
+      if(h.get(i).picked == false && h.get(i).isActive) h.get(i).update();
+
+      if (h.get(i).picked()) h.remove(i);
     }
 
     for (int i = 0; i < rf.size(); i++)
@@ -126,10 +165,10 @@ class Room
 
       if (rf.size() != 0 && i != rf.size()) player.hit(rf.get(i));
     }
-    
+
     for (int i = 0; i < p.size(); i++)
     { 
-      if(dist(player.pos.x, player.pos.y, player.pos.z, p.get(i).pos.x, p.get(i).pos.y, p.get(i).pos.z) < 500) p.get(i).shoot(player.getPos());
+      if (dist(player.pos.x, player.pos.y, player.pos.z, p.get(i).pos.x, p.get(i).pos.y, p.get(i).pos.z) < 500) p.get(i).shoot(player.getPos());
       p.get(i).update();
 
       if (p.get(i).killed) p.remove(i);

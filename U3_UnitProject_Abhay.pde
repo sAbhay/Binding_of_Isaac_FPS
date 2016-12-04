@@ -10,11 +10,13 @@ boolean shooting;
 
 PVector roomSize = new PVector(1000, 500, 1000);
 
-PImage texture[] = new PImage[4];
+PImage texture[] = new PImage[5];
 
 PImage roomTexture[] = new PImage[1];
 
 PImage doorTexture[] = new PImage[2];
+
+PImage heartTexture[] = new PImage[3];
 
 Floor floor;
 
@@ -29,7 +31,7 @@ void setup()
   noStroke();
 
   cam = new QueasyCam(this);
-  player = new Player(new PVector(100, 200, 100), 1, 2, 10, 500, 1000, 0, 6);
+  player = new Player(new PVector(100, 200, 100), 1, 2, 10, 500, 750, 5, 6);
 
   cam.speed = player.speed;
 
@@ -37,11 +39,16 @@ void setup()
   texture[1] = loadImage("tear.png");
   texture[2] = loadImage("bloodTear.png");
   texture[3] = loadImage("pooter.png");
+  texture[4] = loadImage("redHeart.pmg");
 
   roomTexture[0] = loadImage("floor.png");
   
   doorTexture[0] = loadImage("closedDoor.png");
   doorTexture[1] = loadImage("openDoor.png");
+  
+  heartTexture[0] = loadImage("halfHeart.png");
+  heartTexture[1] = loadImage("redHeart.png");
+  heartTexture[2] = loadImage("twoHearts.png");
 
   floor = new Floor();
 

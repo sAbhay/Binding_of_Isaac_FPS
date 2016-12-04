@@ -16,7 +16,7 @@ class Pooter extends Enemy
   { 
     if(interval < millis())
     {
-      b.add(new Bullet(pos, _target, 10, 500, 10, 2));
+      b.add(new Bullet(pos, _target, 7.5, 400, 10, 2));
       
       interval = millis();
       interval += fireRate;

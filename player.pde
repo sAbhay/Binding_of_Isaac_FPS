@@ -33,7 +33,7 @@ class Player
 
   void shoot()
   {
-    b.add(new Bullet(cam.position, target, shotSpeed, range, 5, 1));
+    b.add(new Bullet(cam.position, target, shotSpeed, range, tearSize, 1));
   }
 
   void update()

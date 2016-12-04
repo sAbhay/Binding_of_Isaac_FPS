@@ -1,6 +1,6 @@
 class Floor
 {
-  int map[][] = {{0, 1, 0, 0, 1}, 
+  int map[][] = {{0, 2, 0, 0, 1}, 
                  {1, 1, 1, 1, 1}, 
                  {0, 1, 0, 0, 1},
                  {1, 1, 0, 1, 1},
@@ -14,9 +14,9 @@ class Floor
     {
       for (int j = 0; j < map[i].length; j++)
       {
-        if (map[i][j] == 1)
+        if (map[i][j] != 0)
         {
-          r.add(new Room(i, j));
+          r.add(new Room(i, j, map[i][j]));
         }
       }
     }
