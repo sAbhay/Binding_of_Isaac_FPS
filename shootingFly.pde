@@ -5,7 +5,7 @@ class Pooter extends Enemy
   
   Pooter(PVector _pos, float _speed, PVector _size, float _health, float _damage, int _fireRate, String _model)
   {
-    super(_pos, _speed, _size, _health, _damage, _model);
+    super(_pos, _speed, _size, _health, _damage, _model, 1.5);
     
     fireRate = _fireRate;
     
@@ -16,7 +16,7 @@ class Pooter extends Enemy
   { 
     if(interval < millis())
     {
-      b.add(new Bullet(pos, _target, 7.5, 400, 10, 2));
+      b.add(new Bullet(pos, _target, 7.5, 400, 10, 1));
       
       interval = millis();
       interval += fireRate;

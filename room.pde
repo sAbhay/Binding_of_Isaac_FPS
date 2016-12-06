@@ -76,10 +76,19 @@ class Room
       p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/3, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 2, 1, 2000, "fly.obj"));
     }
 
-     for(int i = 0; i < (int) random(10); i++)
-     {
-       r.add(new Rock(new PVector(random(-roomSize.x/2, roomSize.x/2), roomSize.y/2 - 40, random(-roomSize.z/2, roomSize.z/2))));
-     }
+    for (int i = 0; i < (int) random(10); i++)
+    {
+      int x = (int) random(-4, 4);
+      int z = (int) random(-4, 4);
+
+      if (x == 0 && z == 0)
+      {
+        x = (int) random(-4, 4);
+        z = (int) random(-4, 4);
+      }
+
+      r.add(new Rock(new PVector(x * roomSize.x/10, roomSize.y/2 - 40, z * roomSize.z/10)));
+    }
   }
 
   void display()
@@ -184,6 +193,8 @@ class Room
     for (int i = 0; i < r.size(); i++)
     {
       r.get(i).display();
+      
+      player.checkRocks(r.get(i));
     }
   }
 

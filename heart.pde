@@ -11,12 +11,27 @@ class Heart
     type = _type;
     heart = createShape(BOX, 40);
     
-    heart.setTexture(heartTexture[type]);
+    switch(type)
+    {
+     case 0:
+     heart = loadShape("half_heart.obj");
+     break;
+     
+     case 1:
+     heart = loadShape("heart.obj");
+     break;
+     
+     case 2:
+     heart = loadShape("heart_bundle.obj");
+     break;
+    }
+    
+    heart.scale(30);
   }
   
   void take()
   {
-    if(player.pos.x >= -20 && player.pos.x <= 20 && player.pos.z >= -20 && player.pos.z <= 20)
+    if(player.pos.x >= -40 && player.pos.x <= 40 && player.pos.z >= -40 && player.pos.z <= 40)
     { 
       picked = true;
       

@@ -17,7 +17,7 @@ class Enemy // base enemy class
   
   ArrayList<Bullet> b = new ArrayList<Bullet>();
 
-  Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model)
+  Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model, float _scale)
   {
     start = _pos;
     pos = _pos;
@@ -29,7 +29,7 @@ class Enemy // base enemy class
     size = _size;
     
     enemy = loadShape(model);
-    enemy.scale(size.x/2, size.y/2, size.z/2);
+    enemy.scale(size.x/(_scale), size.y/(_scale), size.z/(_scale));
     
     health = _health;
     damage = _damage;
@@ -40,6 +40,12 @@ class Enemy // base enemy class
     pushMatrix();
 
     translate(pos.x, pos.y, pos.z);
+    rotateX(PI);
+    PVector rot = new PVector();
+    rot = PVector.sub(pos, player.getPos());
+    PVector side = new PVector();
+    side = PVector.sub(pos, rot);
+    //rotateY(side.x);
     shape(enemy);
     
     noFill();

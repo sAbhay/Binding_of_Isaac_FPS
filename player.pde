@@ -16,7 +16,7 @@ class Player
 
   public float health;
 
-  private float maxHealth = 6;
+  private float maxHealth;
 
   Player(PVector _size, float _damage, float _speed, float _shotSpeed, float _tears, float _range, float _tearSize, float _health)
   {
@@ -29,18 +29,20 @@ class Player
     tearSize = _tearSize;
 
     health = _health;
-
+    maxHealth = 6;
+    
     pos = new PVector(0, size.y/2, 0);
   }
 
   void shoot()
   {
-    b.add(new Bullet(cam.position, target, shotSpeed, range, tearSize, 1));
+    b.add(new Bullet(cam.position, target, shotSpeed, range, tearSize, 0));
   }
 
   void update()
   {
     checkBoundaries();
+    checkHealth();
 
     target = PVector.add(cam.position, cam.getForward());
 
@@ -60,7 +62,6 @@ class Player
     if (pos.x >= enemy.pos.x - enemy.size.x/2 && pos.x <= enemy.pos.x + enemy.size.x/2 && pos.y >= enemy.pos.y - enemy.size.y/2 && pos.y <= enemy.pos.y + enemy.size.y/2 && pos.z >= enemy.pos.z - enemy.size.z/2 && pos.z <= enemy.pos.z + enemy.size.z/2)
     {
       pos.x += enemy.size.x*4;
-      pos.y += enemy.size.y*4;
       pos.z += enemy.size.z*4;
 
       health -= enemy.damage;
@@ -95,6 +96,14 @@ class Player
     if (health > maxHealth)
     {
       health = maxHealth;
+    }
+  }
+  
+  void checkRocks(Rock rock)
+  {
+    if((pos.x + size.x/2 >= rock.pos.x - rock.size/2 || pos.x - size.x/2 >= rock.pos.x - rock.size/2) && (pos.x + size.x/2 <= rock.pos.x + rock.size/2 || pos.x - size.x/2 <= rock.pos.x + rock.size/2) && (pos.y + size.y/2 >= rock.pos.y - rock.size/2 || pos.y - size.y/2 >= rock.pos.y - rock.size/2) && (pos.y + size.y/2 <= rock.pos.y + rock.size/2 || pos.y - size.y/2 <= rock.pos.y + rock.size/2) && (pos.z + size.z/2 >= rock.pos.z - rock.size/2 || pos.z - size.z >= rock.pos.z - rock.size/2) && (pos.z + size.z/2 <= rock.pos.z + rock.size/2 || pos.z + size.z <= rock.pos.z + rock.size/2))
+    {
+      // do something
     }
   }
 

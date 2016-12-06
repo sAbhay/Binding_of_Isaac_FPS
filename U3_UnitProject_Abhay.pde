@@ -1,6 +1,4 @@
-import queasycam.*;
-
-QueasyCam cam;
+QueasyCam cam; //<>//
 
 Player player;
 
@@ -10,11 +8,9 @@ boolean shooting;
 
 PVector roomSize = new PVector(1000, 500, 1000);
 
-PImage texture[] = new PImage[5];
+PImage texture[] = new PImage[2];
 PImage roomTexture[] = new PImage[1];
 PImage doorTexture[] = new PImage[2];
-PImage heartTexture[] = new PImage[3];
-PImage rockTexture[] = new PImage[1];
 
 Floor floor;
 
@@ -28,34 +24,25 @@ void setup()
   fullScreen(P3D);
   noStroke();
 
-  cam = new QueasyCam(this);
+  cam = new QueasyCam(this, 0.01f, 1415f);
   player = new Player(new PVector(100, 200, 100), 1, 2, 10, 500, 750, 5, 6);
 
   cam.speed = player.speed;
 
-  texture[0] = loadImage("redfly.png");
-  texture[1] = loadImage("tear.png");
-  texture[2] = loadImage("bloodTear.png");
-  texture[3] = loadImage("pooter.png");
-  texture[4] = loadImage("redHeart.pmg");
+  texture[0] = loadImage("tear.png");
+  texture[1] = loadImage("bloodTear.png");
 
   roomTexture[0] = loadImage("floor.png");
-  
+
   doorTexture[0] = loadImage("closedDoor.png");
   doorTexture[1] = loadImage("openDoor.png");
-  
-  heartTexture[0] = loadImage("halfHeart.png");
-  heartTexture[1] = loadImage("redHeart.png");
-  heartTexture[2] = loadImage("twoHearts.png");
-  
-  rockTexture[0] = loadImage("rock.png");
 
   floor = new Floor();
 
   floor.create();
 
   time = millis();
-  
+
   noCursor();
 }
 
@@ -73,12 +60,12 @@ void draw()
 
   println(prs + ", ", pru);
 
-  if (player.health <= 0) background(255, 0, 0); //<>//
+  if (player.health <= 0) background(255, 0, 0);
 
   for (int i = 0; i < player.health; i++)
   {
     PVector forward = player.getTarget();
-    
+
     pushMatrix();
 
     translate(forward.x, forward.y, forward.z);
