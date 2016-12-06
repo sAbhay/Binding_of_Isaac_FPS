@@ -11,12 +11,10 @@ boolean shooting;
 PVector roomSize = new PVector(1000, 500, 1000);
 
 PImage texture[] = new PImage[5];
-
 PImage roomTexture[] = new PImage[1];
-
 PImage doorTexture[] = new PImage[2];
-
 PImage heartTexture[] = new PImage[3];
+PImage rockTexture[] = new PImage[1];
 
 Floor floor;
 
@@ -49,12 +47,16 @@ void setup()
   heartTexture[0] = loadImage("halfHeart.png");
   heartTexture[1] = loadImage("redHeart.png");
   heartTexture[2] = loadImage("twoHearts.png");
+  
+  rockTexture[0] = loadImage("rock.png");
 
   floor = new Floor();
 
   floor.create();
 
   time = millis();
+  
+  noCursor();
 }
 
 void draw() 

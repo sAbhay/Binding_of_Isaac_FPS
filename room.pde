@@ -16,6 +16,8 @@ class Room
   int type;
   int drop;
 
+  ArrayList<Rock> r = new ArrayList<Rock>();
+
   Room(int _indexUp, int _indexSide, int _type)
   {
     indexUp = _indexUp;
@@ -66,13 +68,18 @@ class Room
 
     for (int i = 0; i < nrf; i++)
     {
-      rf.add(new RedFly(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 0, 2, 1));
+      rf.add(new RedFly(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(20, 20, 20), 2, 1, "fly.obj"));
     }
 
     for (int i = 0; i < np; i++)
     {
-      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(40, 40, 40), 3, 2, 1, 2000));
+      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/3, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 2, 1, 2000, "fly.obj"));
     }
+
+     for(int i = 0; i < (int) random(10); i++)
+     {
+       r.add(new Rock(new PVector(random(-roomSize.x/2, roomSize.x/2), roomSize.y/2 - 40, random(-roomSize.z/2, roomSize.z/2))));
+     }
   }
 
   void display()
@@ -126,32 +133,32 @@ class Room
 
     enemyCount = rf.size() + p.size();
 
-      for (int i = 0; i < d.length; i++)
+    for (int i = 0; i < d.length; i++)
+    {
+      if (enemyCount <= 0)
       {
-        if (enemyCount <= 0)
-        {
-          d[i].open = true;
-          
-          for(int j = 0; j < h.size(); j++)
-          {
-            h.get(j).isActive = true; 
-          }
-        }
+        d[i].open = true;
 
-        if (d[i].isActive)
+        for (int j = 0; j < h.size(); j++)
         {
-          d[i].display();
-        }
-
-        if (d[i].isActive && d[i].open)
-        {
-          d[i].update();
+          h.get(j).isActive = true;
         }
       }
 
+      if (d[i].isActive)
+      {
+        d[i].display();
+      }
+
+      if (d[i].isActive && d[i].open)
+      {
+        d[i].update();
+      }
+    }
+
     for (int i = 0; i < h.size(); i++)
     {
-      if(h.get(i).picked == false && h.get(i).isActive) h.get(i).update();
+      if (h.get(i).picked == false && h.get(i).isActive) h.get(i).update();
 
       if (h.get(i).picked()) h.remove(i);
     }
@@ -172,6 +179,11 @@ class Room
       p.get(i).update();
 
       if (p.get(i).killed) p.remove(i);
+    }
+
+    for (int i = 0; i < r.size(); i++)
+    {
+      r.get(i).display();
     }
   }
 

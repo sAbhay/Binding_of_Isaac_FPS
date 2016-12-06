@@ -1,8 +1,8 @@
 class RedFly extends Enemy
 {
-  RedFly(PVector _pos, float _speed, PVector _size, int _textureNo, float _health, float _damage)
+  RedFly(PVector _pos, float _speed, PVector _size, float _health, float _damage, String _model)
   {
-    super(_pos, _speed, _size, _textureNo, _health, _damage);
+    super(_pos, _speed, _size, _health, _damage, _model);
   }
 
   void move(PVector _target)

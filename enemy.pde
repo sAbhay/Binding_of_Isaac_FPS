@@ -17,7 +17,7 @@ class Enemy // base enemy class
   
   ArrayList<Bullet> b = new ArrayList<Bullet>();
 
-  Enemy(PVector _pos, float _speed, PVector _size, int _textureNo, float _health, float _damage)
+  Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model)
   {
     start = _pos;
     pos = _pos;
@@ -27,9 +27,9 @@ class Enemy // base enemy class
     speed = _speed;
 
     size = _size;
-
-    enemy = createShape(BOX, size.x, size.y, size.z);
-    enemy.setTexture(texture[_textureNo]);
+    
+    enemy = loadShape(model);
+    enemy.scale(size.x/2, size.y/2, size.z/2);
     
     health = _health;
     damage = _damage;
@@ -41,6 +41,9 @@ class Enemy // base enemy class
 
     translate(pos.x, pos.y, pos.z);
     shape(enemy);
+    
+    noFill();
+    box(size.x, size.y, size.z);
 
     popMatrix();
   }

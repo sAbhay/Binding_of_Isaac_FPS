@@ -16,6 +16,8 @@ class Player
 
   public float health;
 
+  private float maxHealth = 6;
+
   Player(PVector _size, float _damage, float _speed, float _shotSpeed, float _tears, float _range, float _tearSize, float _health)
   {
     size = _size;
@@ -85,6 +87,14 @@ class Player
         enemy.b.remove(i);
         health -= enemy.damage;
       }
+    }
+  }
+
+  void checkHealth()
+  {
+    if (health > maxHealth)
+    {
+      health = maxHealth;
     }
   }
 
