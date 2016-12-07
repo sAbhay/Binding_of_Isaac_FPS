@@ -17,6 +17,9 @@ class Room
   int drop;
 
   ArrayList<Rock> r = new ArrayList<Rock>();
+  ArrayList<Item> items = new ArrayList<Item>();
+
+  boolean cleared;
 
   Room(int _indexUp, int _indexSide, int _type)
   {
@@ -55,10 +58,20 @@ class Room
       {
         h.add(new Heart(2));
       }
+
+      cleared = false;
       break;
 
     case 2:
       enemyCount = 0;
+      cleared = true;
+      break;
+
+    case 3:
+      enemyCount = 0;
+      cleared = true;
+
+      items.add(new Item(new PVector(0, 0, 0), 0));
       break;
     }
 
@@ -147,6 +160,7 @@ class Room
       if (enemyCount <= 0)
       {
         d[i].open = true;
+        cleared = true;
 
         for (int j = 0; j < h.size(); j++)
         {
@@ -193,8 +207,20 @@ class Room
     for (int i = 0; i < r.size(); i++)
     {
       r.get(i).display();
-      
+
       player.checkRocks(r.get(i));
+    }
+
+    for (int i = 0; i < items.size(); i++)
+    {
+      items.get(i).display();
+      if (items.get(i).pick())
+      {
+        if (items.get(i).name == "Transcendence")
+        {
+          items.get(i).giveFlight(true);
+        }
+      }
     }
   }
 

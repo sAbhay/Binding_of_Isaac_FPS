@@ -8,7 +8,7 @@ class Rock
   Rock(PVector _pos)
   {
     pos = _pos;
-    size = 90;
+    size = (int) (roomSize.x/10 + roomSize.z/10)/2;
     
     rock = loadShape("rock.obj");
     rock.scale(size/3);
@@ -19,8 +19,6 @@ class Rock
     pushMatrix();
     translate(pos.x, pos.y + 15, pos.z);
     shape(rock);
-    noFill();
-    box(size);
     popMatrix();
   }
 }

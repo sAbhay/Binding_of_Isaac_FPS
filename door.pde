@@ -12,11 +12,11 @@ class Door
     pos = _pos;
     type = _type;
 
-    door[0] = createShape(BOX, roomSize.x/5, roomSize.y/2, 20);
-    door[1] = createShape(BOX, roomSize.x/5, roomSize.y/2, 20);
+    door[0] = createShape(BOX, roomSize.x/5, 9*roomSize.y/10, 20);
+    door[1] = createShape(BOX, roomSize.x/5, 9*roomSize.y/10, 20);
 
-    door[2] = createShape(BOX, 20, roomSize.y/2, roomSize.z/5);
-    door[3] = createShape(BOX, 20, roomSize.y/2, roomSize.z/5);
+    door[2] = createShape(BOX, 20, 9*roomSize.y/10, roomSize.z/5);
+    door[3] = createShape(BOX, 20, 9*roomSize.y/10, roomSize.z/5);
 
     door[0].setTexture(doorTexture[0]);
     door[1].setTexture(doorTexture[1]);
@@ -105,7 +105,7 @@ class Door
     {
     case 0:
 
-      if (player.pos.x >= pos.x - roomSize.x/5 && player.pos.x <= pos.x + roomSize.x/5 && player.pos.y >= pos.y - roomSize.y/5 && player.pos.y <= pos.y + roomSize.y/5 && player.pos.z >= pos.z - 10 && player.pos.z <= pos.z + 10)
+      if (player.pos.x >= pos.x - roomSize.x/5 && player.pos.x <= pos.x + roomSize.x/5 && player.pos.z >= pos.z - 10 && player.pos.z <= pos.z + 10)
       {
         prs--;
 
@@ -116,7 +116,7 @@ class Door
 
     case 1:
 
-      if (player.pos.x >= pos.x - roomSize.x/5 && player.pos.x <= pos.x + roomSize.x/5 && player.pos.y >= pos.y - roomSize.y/5 && player.pos.y <= pos.y + roomSize.y/5 && player.pos.z >= pos.z - 10 && player.pos.z <= pos.z + 10)
+      if (player.pos.x >= pos.x - roomSize.x/5 && player.pos.x <= pos.x + roomSize.x/5 && player.pos.z >= pos.z - 10 && player.pos.z <= pos.z + 10)
       {
         prs++;
 
@@ -127,7 +127,7 @@ class Door
 
     case 2:
 
-      if (player.pos.z >= pos.z - roomSize.z/5 && player.pos.z <= pos.z + roomSize.z/5 && player.pos.y >= pos.y - roomSize.y/5 && player.pos.y <= pos.y + roomSize.y/5 && player.pos.x >= pos.x - 10 && player.pos.x <= pos.x + 10)
+      if (player.pos.z >= pos.z - roomSize.z/5 && player.pos.z <= pos.z + roomSize.z/5 && player.pos.x >= pos.x - 10 && player.pos.x <= pos.x + 10)
       {
         pru--;
 
@@ -139,7 +139,7 @@ class Door
 
     case 3:
 
-      if (player.pos.z >= pos.z - roomSize.z/5 && player.pos.z <= pos.z + roomSize.z/5 && player.pos.y >= pos.y - roomSize.y/5 && player.pos.y <= pos.y + roomSize.y/5 && player.pos.x >= pos.x - 10 && player.pos.x <= pos.x + 10)
+      if (player.pos.z >= pos.z - roomSize.z/5 && player.pos.z <= pos.z + roomSize.z/5 && player.pos.x >= pos.x - 10 && player.pos.x <= pos.x + 10)
       {
         pru++;
 

@@ -6,7 +6,7 @@ class Player
   private float damage;
   private float speed;
   private float shotSpeed;
-  public float tears;
+  private float tears;
   private float range;
   private float tearSize;
 
@@ -30,7 +30,7 @@ class Player
 
     health = _health;
     maxHealth = 6;
-    
+
     pos = new PVector(0, size.y/2, 0);
   }
 
@@ -98,12 +98,17 @@ class Player
       health = maxHealth;
     }
   }
-  
+
   void checkRocks(Rock rock)
   {
-    if((pos.x + size.x/2 >= rock.pos.x - rock.size/2 || pos.x - size.x/2 >= rock.pos.x - rock.size/2) && (pos.x + size.x/2 <= rock.pos.x + rock.size/2 || pos.x - size.x/2 <= rock.pos.x + rock.size/2) && (pos.y + size.y/2 >= rock.pos.y - rock.size/2 || pos.y - size.y/2 >= rock.pos.y - rock.size/2) && (pos.y + size.y/2 <= rock.pos.y + rock.size/2 || pos.y - size.y/2 <= rock.pos.y + rock.size/2) && (pos.z + size.z/2 >= rock.pos.z - rock.size/2 || pos.z - size.z >= rock.pos.z - rock.size/2) && (pos.z + size.z/2 <= rock.pos.z + rock.size/2 || pos.z + size.z <= rock.pos.z + rock.size/2))
+    /*if((pos.x + size.x/2 >= rock.pos.x - rock.size/2 || pos.x - size.x/2 >= rock.pos.x - rock.size/2) && (pos.x + size.x/2 <= rock.pos.x + rock.size/2 || pos.x - size.x/2 <= rock.pos.x + rock.size/2) && pos.y + size.y/2 >= rock.pos.y - rock.size/2 && pos.y + size.y/2 <= rock.pos.y + rock.size/2 && (pos.z + size.z/2 >= rock.pos.z - rock.size/2 || pos.z - size.z >= rock.pos.z - rock.size/2) && (pos.z + size.z/2 <= rock.pos.z + rock.size/2 || pos.z + size.z <= rock.pos.z + rock.size/2))
+     {
+     // do something
+     }*/
+
+    if (pos.y + size.y/2 >= rock.pos.y - rock.size/2 && pos.y <= rock.pos.y + rock.size/2)
     {
-      // do something
+      //if(dist(pos.x + pos.))
     }
   }
 
@@ -120,5 +125,55 @@ class Player
   float getTears()
   {
     return tears;
+  }
+  
+  void setTears(float _tears)
+  {
+    tears = _tears;
+  }
+
+  float getMaxHealth()
+  {
+    return maxHealth;
+  }
+
+  float getHealth()
+  {
+    return health;
+  }
+
+  void setMaxHealth(float _maxHealth)
+  {
+    maxHealth = _maxHealth;
+  }
+
+  float getDamage()
+  {
+    return damage;
+  }
+
+  void setDamage(float _damage)
+  {
+    damage = _damage;
+  }
+  
+  float getTearSize()
+  {
+   return tearSize; 
+  }
+  
+  void setTearSize(float _tearSize)
+  {
+   tearSize = _tearSize; 
+  }
+  
+  float getShotSpeed()
+  {
+   return shotSpeed; 
+  }
+  
+  void setShotSpeed(float _shotSpeed)
+  {
+    shotSpeed = _shotSpeed;
   }
 }

@@ -141,4 +141,8 @@ public class QueasyCam {
   public PVector getRight(){
     return right;
   }
+  
+  public PVector getPos(){
+    return position;
+  }
 }

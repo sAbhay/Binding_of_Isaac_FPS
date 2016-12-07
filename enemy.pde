@@ -48,8 +48,8 @@ class Enemy // base enemy class
     //rotateY(side.x);
     shape(enemy);
     
-    noFill();
-    box(size.x, size.y, size.z);
+    //noFill();
+    //box(size.x, size.y, size.z);
 
     popMatrix();
   }

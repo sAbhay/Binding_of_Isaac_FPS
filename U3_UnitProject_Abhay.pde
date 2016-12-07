@@ -19,13 +19,15 @@ int pru = 1; // player room side, determines which the second value of the room 
 
 int time;
 
+boolean flying = false;
+
 void setup() 
 {
   fullScreen(P3D);
   noStroke();
 
   cam = new QueasyCam(this, 0.01f, 1415f);
-  player = new Player(new PVector(100, 200, 100), 1, 2, 10, 500, 750, 5, 6);
+  player = new Player(new PVector(50, 75, 50), 1, 2, 10, 500, 750, 5, 6);
 
   cam.speed = player.speed;
 
@@ -50,7 +52,13 @@ void draw()
 { 
   background(0);
 
-  cam.position.y = player.size.y/3;
+  if (!flying) 
+  {
+    cam.position.y = player.size.y/3;
+  } else 
+  {
+    cam.position.y = -player.size.y/2;
+  }
 
   player.pos = cam.position;
 
@@ -58,9 +66,28 @@ void draw()
 
   player.update();
 
-  println(prs + ", ", pru);
-
   if (player.health <= 0) background(255, 0, 0);
+
+  for (int i = 0; i < player.getMaxHealth(); i++)
+  {
+    PVector forward = player.getTarget();
+
+    pushMatrix();
+
+    translate(forward.x, forward.y, forward.z);
+
+    pushMatrix();
+
+    translate(i*0.1 - 0.5, -0.4, 0);
+
+    fill(0, 0, 0, 100);
+    noStroke();
+    box(0.06);
+
+    popMatrix();
+
+    popMatrix();
+  }
 
   for (int i = 0; i < player.health; i++)
   {
@@ -69,17 +96,17 @@ void draw()
     pushMatrix();
 
     translate(forward.x, forward.y, forward.z);
-    
+
     pushMatrix();
-    
+
     translate(i*0.1 - 0.5, -0.4, 0);
-    
+
     fill(255, 0, 0, 100);
     noStroke();
     box(0.06);
 
     popMatrix();
-    
+
     popMatrix();
   }
 
