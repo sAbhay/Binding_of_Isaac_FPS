@@ -3,23 +3,28 @@ class Item
   private PShape item;
   private PVector pos;
   public String name;
+  private int select;
+  private float rot;
 
-  private Outline[] outlines = new Outline[5];
+  private Outline[] o = new Outline[5];
 
-  Item(PVector _pos, int select)
+  Item(PVector _pos, int _select)
   {
     pos = _pos;
 
-    outlines[0] = new Outline("Transcendence", 0, 0, 0, 0);
-    outlines[1] = new Outline("Snack", 1, 1, 0, 0);
-    outlines[2] = new Outline("Blood of the Martyr", 2, 1, 0, 0);
-    outlines[3] = new Outline("Sad Onion", 3, 100, 0, 0);
-    outlines[4] = new Outline("Torn Photo", 3, 100, 4, 2);
+    o[0] = new Outline("Transcendence", 0, 0, 0, 0);
+    o[1] = new Outline("Dinner", 1, 2, 0, 0);
+    o[2] = new Outline("Blood_of_the_Martyr", 2, 1, 0, 0);
+    o[3] = new Outline("Sad_Onion", 3, 100, 0, 0);
+    o[4] = new Outline("Torn_Photo", 3, 100, 4, 2);
 
-    name = outlines[select].name;
-    
+    select = _select;
+    name = o[select].name;
+
     item = loadShape(name + ".obj");
     item.scale(40);
+    
+    rot = 0;
   }
 
   public boolean pick()
@@ -38,6 +43,10 @@ class Item
 
     translate(pos.x, pos.y, pos.z);
     rotateX(PI);
+    
+    rot++;
+    rotateY(radians(rot));
+    
     shape(item);
 
     popMatrix();
@@ -45,74 +54,72 @@ class Item
 
   public void changeStat()
   {
-    for (Outline o : outlines)
+    switch(o[select].statSelect)
     {
-      switch(o.statSelect)
-      {
-      case 0:
-        float mh = player.getMaxHealth();
-        mh += o.change;
-        player.setMaxHealth(mh);
-        break;
+    case 1:
+      float mh = player.getMaxHealth();
+      mh += o[select].change;
+      player.setMaxHealth(mh);
+      break;
 
-      case 1:
-        float d = player.getDamage();
-        d += o.change;
-        player.setDamage(d);
+    case 2:
+      float d = player.getDamage();
+      d += o[select].change;
+      player.setDamage(d);
 
-        float ts = player.getTearSize();
-        ts += o.change/2;
-        player.setTearSize(ts);
-        break;
+      float ts = player.getTearSize();
+      ts += o[select].change/2;
+      player.setTearSize(ts);
+      break;
 
-      case 2:
-        float t = player.getTears();
-        t -= o.change;
-        player.setTears(t);
-        break;
+    case 3:
+      float t = player.getTears();
+      t -= o[select].change;
+      player.setTears(t);
+      break;
 
-      case 3:
-        float ss = player.getShotSpeed();
-        ss -= o.change;
-        player.setShotSpeed(ss);
-        break;
-      }
-      
-      switch(o.secondary)
-      {
-      case 0:
-        float mh = player.getMaxHealth();
-        mh += o.secondaryChange;
-        player.setMaxHealth(mh);
-        break;
+    case 4:
+      float ss = player.getShotSpeed();
+      ss += o[select].change;
+      player.setShotSpeed(ss);
+      break;
+    }
 
-      case 1:
-        float d = player.getDamage();
-        d += o.secondaryChange;
-        player.setDamage(d);
+    switch(o[select].secondary)
+    {
+    case 1:
+      float mh = player.getMaxHealth();
+      mh += o[select].secondaryChange;
+      player.setMaxHealth(mh);
+      break;
 
-        float ts = player.getTearSize();
-        ts += o.secondaryChange/2;
-        player.setTearSize(ts);
-        break;
+    case 2:
+      float d = player.getDamage();
+      d += o[select].secondaryChange;
+      player.setDamage(d);
 
-      case 2:
-        float t = player.getTears();
-        t -= o.secondaryChange;
-        player.setTears(t);
-        break;
+      float ts = player.getTearSize();
+      ts += o[select].secondaryChange/2;
+      player.setTearSize(ts);
+      break;
 
-      case 3:
-        float ss = player.getShotSpeed();
-        ss -= o.secondaryChange;
-        player.setShotSpeed(ss);
-        break;
-      }
+    case 3:
+      float t = player.getTears();
+      t -= o[select].secondaryChange;
+      player.setTears(t);
+      break;
+
+    case 4:
+      float ss = player.getShotSpeed();
+      ss += o[select].secondaryChange;
+      player.setShotSpeed(ss);
+      break;
     }
   }
 
-  public void giveFlight(boolean _flight)
+  void update()
   {
-    flying = _flight;
+    display();
+    if (pick()) changeStat();
   }
 }

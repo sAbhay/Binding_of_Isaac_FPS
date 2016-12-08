@@ -65,13 +65,13 @@ class Room
     case 2:
       enemyCount = 0;
       cleared = true;
+
+      items.add(new Item(new PVector(0, roomSize.y/4, 0), (int) random(5)));
       break;
 
     case 3:
       enemyCount = 0;
       cleared = true;
-
-      items.add(new Item(new PVector(0, 0, 0), 0));
       break;
     }
 
@@ -212,14 +212,19 @@ class Room
     }
 
     for (int i = 0; i < items.size(); i++)
-    {
+    { 
       items.get(i).display();
-      if (items.get(i).pick())
+
+      if (items.get(i).pick()) 
       {
+        items.get(i).changeStat();
+
         if (items.get(i).name == "Transcendence")
         {
-          items.get(i).giveFlight(true);
+          flying = true;
         }
+
+        items.remove(i);
       }
     }
   }
@@ -231,5 +236,10 @@ class Room
       return true;
     }
     return false;
+  }
+
+  int numHearts()
+  {
+    return h.size();
   }
 }

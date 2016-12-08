@@ -1,7 +1,8 @@
 class Floor
 {
-  int map[][] = {{0, 2, 0, 0, 1}, 
-    {1, 3, 1, 1, 1}, 
+  int map[][] = 
+    {{0, 3, 0, 0, 1}, 
+    {1, 2, 1, 1, 1}, 
     {0, 1, 0, 0, 1}, 
     {1, 1, 0, 1, 1}, 
     {0, 1, 1, 1, 0}};
@@ -88,16 +89,28 @@ class Floor
 
           translate(i*0.05 + 0.5, j*0.05 - 0.4, 0);
 
+          if (map[i][j] == 2)
+          {
+            fill(255, 255, 0);
+            box(0.03);
+          }
+
           fill(100, 128);
 
           for (Room room : r)
           {
             if (room.indexSide == i && room.indexUp == j && room.cleared)
             {
+              if (room.numHearts() != 0)
+              {
+                fill(255, 0, 0);
+                box(0.025);
+              }
+
               fill(200, 128);
             }
           }
-          
+
           if (prs == j && pru == i)
           {
             fill(255, 200);
