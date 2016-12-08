@@ -10,7 +10,7 @@ class RedFly extends Enemy
     dir = PVector.sub(_target, pos);
     
     dir.normalize();
-    dir.mult(speed);
+    dir.mult(super.speed);
     
     pos.add(dir);
   }

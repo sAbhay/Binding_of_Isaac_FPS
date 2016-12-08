@@ -238,8 +238,12 @@ class Room
     return false;
   }
 
-  int numHearts()
+  boolean noHearts()
   {
-    return h.size();
+    if(h.size() == 0)
+    {
+     return true; 
+    }
+    return false;
   }
 }

@@ -1,10 +1,10 @@
 class Outline // outline for stat-changing items
 {
-  int statSelect;
-  float change;
-  String name;
-  int secondary;
-  float secondaryChange;
+  public int statSelect;
+  public float change;
+  public String name;
+  public int secondary;
+  public float secondaryChange;
   
   Outline(String _name, int _statSelect, float _changeValue, int _secondary, float _secondaryChange)
   {

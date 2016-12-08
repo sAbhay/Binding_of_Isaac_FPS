@@ -1,25 +1,22 @@
 class Enemy // base enemy class
 {
-  PVector pos;
-  PVector dir;
-  PVector start;
-  PVector target;
+  public PVector pos;
+  public PVector dir;
 
-  float speed;
+  private float speed;
 
-  PVector size;
+  public PVector size;
 
-  PShape enemy;
-  boolean killed = false;
+  private PShape enemy;
+  public boolean killed = false;
   
-  float health;
-  float damage;
+  private float health;
+  public float damage;
   
   ArrayList<Bullet> b = new ArrayList<Bullet>();
 
   Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model, float _scale)
   {
-    start = _pos;
     pos = _pos;
     
     dir = new PVector();
@@ -41,11 +38,6 @@ class Enemy // base enemy class
 
     translate(pos.x, pos.y, pos.z);
     rotateX(PI);
-    PVector rot = new PVector();
-    rot = PVector.sub(pos, player.getPos());
-    PVector side = new PVector();
-    side = PVector.sub(pos, rot);
-    //rotateY(side.x);
     shape(enemy);
     
     //noFill();

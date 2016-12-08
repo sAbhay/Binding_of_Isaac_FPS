@@ -101,7 +101,7 @@ class Floor
           {
             if (room.indexSide == i && room.indexUp == j && room.cleared)
             {
-              if (room.numHearts() != 0)
+              if (!room.noHearts())
               {
                 fill(255, 0, 0);
                 box(0.025);
