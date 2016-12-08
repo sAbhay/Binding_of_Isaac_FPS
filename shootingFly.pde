@@ -1,7 +1,7 @@
 class Pooter extends Enemy
 {
-  int fireRate;
-  int interval;
+  private int fireRate;
+  private int interval;
   
   Pooter(PVector _pos, float _speed, PVector _size, float _health, float _damage, int _fireRate, String _model)
   {

@@ -1,25 +1,25 @@
 class Room
 { 
-  PShape[] fw = new PShape[3]; // floors and walls
+  private PShape[] fw = new PShape[3]; // floors and walls
 
-  int indexUp, indexSide;
+  private int indexUp, indexSide;
 
-  Door[] d = new Door[4];
+  private Door[] d = new Door[4];
 
-  ArrayList<RedFly> rf = new ArrayList<RedFly>();
-  ArrayList<Pooter> p = new ArrayList<Pooter>();
+  private ArrayList<RedFly> rf = new ArrayList<RedFly>();
+  private ArrayList<Pooter> p = new ArrayList<Pooter>();
 
-  int enemyCount;
+  private int enemyCount;
 
-  ArrayList<Heart> h = new ArrayList<Heart>();
+  private ArrayList<Heart> h = new ArrayList<Heart>();
 
-  int type;
-  int drop;
+  private int type;
+  private int drop;
 
-  ArrayList<Rock> r = new ArrayList<Rock>();
-  ArrayList<Item> items = new ArrayList<Item>();
+  private ArrayList<Rock> r = new ArrayList<Rock>();
+  private ArrayList<Item> items = new ArrayList<Item>();
 
-  boolean cleared;
+  private boolean cleared;
 
   Room(int _indexUp, int _indexSide, int _type)
   {

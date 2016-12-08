@@ -1,11 +1,11 @@
 class Door
 {
-  PVector pos;
-  int type;
-  boolean open;
-  boolean isActive;
+  private PVector pos;
+  private int type;
+  private boolean open;
+  private boolean isActive;
 
-  PShape door[] = new PShape[4];
+  private PShape door[] = new PShape[4];
 
   Door(PVector _pos, int _type)
   {

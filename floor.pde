@@ -1,13 +1,13 @@
 class Floor
 {
-  int map[][] = 
+  private int map[][] = 
     {{0, 3, 0, 0, 1}, 
     {1, 2, 1, 1, 1}, 
     {0, 1, 0, 0, 1}, 
     {1, 1, 0, 1, 1}, 
     {0, 1, 1, 1, 0}};
 
-  ArrayList<Room> r = new ArrayList<Room>();
+  private ArrayList<Room> r = new ArrayList<Room>();
 
   void create()
   {

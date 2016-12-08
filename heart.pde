@@ -1,10 +1,10 @@
 class Heart
 {
-  PShape heart;
-  int type;
+  private PShape heart;
+  private int type;
 
-  boolean isActive;
-  boolean picked;
+  private boolean isActive;
+  private boolean picked;
 
   Heart(int _type)
   {

@@ -1,9 +1,9 @@
 class Rock
 {
-  PVector pos;
-  int size;
+  public PVector pos;
+  public int size;
 
-  PShape rock;
+  private PShape rock;
 
   Rock(PVector _pos)
   {

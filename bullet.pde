@@ -3,18 +3,14 @@ class Bullet
   public PVector pos;
   private PVector dir;
 
-  float speed;
-  float size;
+  private float speed;
+  private float size;
 
-  color colour;
+  private float range;
 
-  float range;
+  private PVector start;
 
-  PVector start;
-
-  boolean isAlive;
-
-  PShape tear;
+  private PShape tear;
 
   Bullet(PVector _start, PVector _target, float _speed, float _range, float _tearSize, int _textureNo)
   {
