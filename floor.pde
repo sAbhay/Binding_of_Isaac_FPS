@@ -4,8 +4,10 @@ class Floor
     {{0, 3, 0, 0, 1}, 
     {1, 2, 1, 1, 1}, 
     {0, 1, 0, 0, 1}, 
-    {1, 1, 0, 1, 1}, 
-    {0, 1, 1, 1, 0}};
+    {1, 1, 1, 1, 1}, 
+    {1, 0, 0, 1, 0},
+    {1, 2, 1, 1, 1},
+    {0, 1, 0, 1, 0}};
 
   private ArrayList<Room> r = new ArrayList<Room>();
 
@@ -70,59 +72,50 @@ class Floor
 
   void floorMap()
   {
-    for (int i = 0; i < map.length; i++)
+    PVector mapPos = new PVector();
+    mapPos = PVector.add(cam.position, cam.getForward());
+
+    pushMatrix();
+
+    translate(mapPos.x, mapPos.y, mapPos.z);
+
+    rotateZ(radians(cam.tilt));
+
+    for (Room room : r)
     {
-      for (int j = 0; j < map[i].length; j++)
+      pushMatrix();
+
+      translate(room.getIndexSide() * 0.05 + 0.4, room.getIndexUp() * 0.05 - 0.4, 0);
+
+      fill(100, 128);
+
+      if (room.cleared)
       {
-        if (map[i][j] != 0)
+        if (room.hearts())
         {
-          PVector mapPos = new PVector();
-          mapPos = PVector.add(cam.position, cam.getForward());
-
-          pushMatrix();
-
-          translate(mapPos.x, mapPos.y, mapPos.z);
-
-          rotateZ(radians(cam.tilt));
-
-          pushMatrix();
-
-          translate(i*0.05 + 0.5, j*0.05 - 0.4, 0);
-
-          if (map[i][j] == 2)
-          {
-            fill(255, 255, 0);
-            box(0.03);
-          }
-
-          fill(100, 128);
-
-          for (Room room : r)
-          {
-            if (room.indexSide == i && room.indexUp == j && room.cleared)
-            {
-              if (!room.noHearts())
-              {
-                fill(255, 0, 0);
-                box(0.025);
-              }
-
-              fill(200, 128);
-            }
-          }
-
-          if (prs == j && pru == i)
-          {
-            fill(255, 200);
-          }
-
-          box(0.05);
-
-          popMatrix();
-
-          popMatrix();
+          fill(255, 0, 0);
+          box(0.025);
         }
+
+        if (room.type == 2)
+        {
+          fill(255, 255, 0);
+          box(0.03);
+        }
+
+        fill(200, 128);
       }
+
+      if (room.playerInside())
+      {
+        fill(255, 200);
+      }
+
+      box(0.05);
+
+      popMatrix();
     }
+
+    popMatrix();
   }
 }

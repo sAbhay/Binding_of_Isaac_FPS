@@ -176,4 +176,15 @@ class Player
   {
     shotSpeed = _shotSpeed;
   }
+  
+  float getSpeed()
+  {
+    return speed;
+  }
+  
+  void setSpeed(float _speed)
+  {
+    speed = _speed;
+    cam.speed = speed;
+  }
 }

@@ -13,9 +13,9 @@ class Enemy // base enemy class
   private float health;
   public float damage;
   
-  ArrayList<Bullet> b = new ArrayList<Bullet>();
+  public ArrayList<Bullet> b = new ArrayList<Bullet>();
 
-  Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model, float _scale)
+  Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model, PVector _scale)
   {
     pos = _pos;
     
@@ -26,7 +26,7 @@ class Enemy // base enemy class
     size = _size;
     
     enemy = loadShape(model);
-    enemy.scale(size.x/(_scale), size.y/(_scale), size.z/(_scale));
+    enemy.scale(size.x/(_scale.x), size.y/(_scale.y), size.z/(_scale.z));
     
     health = _health;
     damage = _damage;

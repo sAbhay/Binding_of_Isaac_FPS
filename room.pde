@@ -2,7 +2,8 @@ class Room
 { 
   private PShape[] fw = new PShape[3]; // floors and walls
 
-  private int indexUp, indexSide;
+  private int indexUp;
+  private int indexSide;
 
   private Door[] d = new Door[4];
 
@@ -46,6 +47,7 @@ class Room
     {
     case 1:
       enemyCount = (int) random(5, 10);
+      //enemyCount = 0;
 
       drop = (int) random(20);
       if (drop < 6) 
@@ -66,7 +68,7 @@ class Room
       enemyCount = 0;
       cleared = true;
 
-      items.add(new Item(new PVector(0, roomSize.y/4, 0), (int) random(5)));
+      items.add(new Item(new PVector(0, roomSize.y/12, 0), (int) random(6)));
       break;
 
     case 3:
@@ -86,7 +88,7 @@ class Room
 
     for (int i = 0; i < np; i++)
     {
-      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/3, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 2, 1, 2000, "fly.obj"));
+      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/3, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 3, 1, 2000, "Pooter.obj"));
     }
 
     for (int i = 0; i < (int) random(10); i++)
@@ -238,12 +240,22 @@ class Room
     return false;
   }
 
-  boolean noHearts()
+  boolean hearts()
   {
-    if(h.size() == 0)
+    if(h.size() != 0)
     {
      return true; 
     }
     return false;
+  }
+  
+  int getIndexSide()
+  {
+   return indexSide;
+  }
+  
+  int getIndexUp()
+  {
+   return indexUp; 
   }
 }
