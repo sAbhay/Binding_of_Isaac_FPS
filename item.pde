@@ -6,24 +6,24 @@ class Item
   private int select;
   private float rot;
 
-  private Outline[] o = new Outline[6];
+  private Outline[] o = new Outline[numItems];
 
   Item(PVector _pos, int _select)
   {
     pos = _pos;
 
-    o[0] = new Outline("Transcendence", 0, 0, 0, 0);
-    o[1] = new Outline("Dinner", 1, 2, 0, 0);
-    o[2] = new Outline("Blood_of_the_Martyr", 2, 1, 0, 0);
-    o[3] = new Outline("Sad_Onion", 3, 100, 0, 0);
-    o[4] = new Outline("Torn_Photo", 3, 100, 4, 2);
-    o[5] = new Outline("Growth_Hormones", 4, 1, 2, 1);
+    o[0] = new Outline("Transcendence", 40, 0, 0, 0, 0);
+    o[1] = new Outline("Dinner", 40, 1, 2, 0, 0);
+    o[2] = new Outline("Blood_of_the_Martyr", 40, 2, 1, 0, 0);
+    o[3] = new Outline("Sad_Onion", 35, 3, 100, 0, 0);
+    o[4] = new Outline("Torn_Photo", 40, 3, 100, 4, 2);
+    o[5] = new Outline("Growth_Hormones", 10, 4, 1, 2, 1);
 
     select = _select;
     name = o[select].name;
 
     item = loadShape(name + ".obj");
-    item.scale(40);
+    item.scale(o[select].scale);
 
     rot = 0;
   }

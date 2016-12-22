@@ -21,6 +21,8 @@ int time;
 
 boolean flying = false;
 
+int numItems = 6; // number of items
+
 void setup() 
 {
   fullScreen(P3D);

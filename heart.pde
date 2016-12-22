@@ -44,14 +44,14 @@ class Heart
           break;
 
         case 1:
-          player.health += 2;
+        player.health += 2;
           break;
 
         case 2:
           player.health += 4;
           break;
         }
-      } 
+      }
     }
   }
 

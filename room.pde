@@ -47,9 +47,8 @@ class Room
     {
     case 1:
       enemyCount = (int) random(5, 10);
-      //enemyCount = 0;
 
-      drop = (int) random(20);
+      drop = (int) random(40);
       if (drop < 6) 
       {
         h.add(new Heart(0));
@@ -68,7 +67,7 @@ class Room
       enemyCount = 0;
       cleared = true;
 
-      items.add(new Item(new PVector(0, roomSize.y/12, 0), (int) random(6)));
+      items.add(new Item(new PVector(0, roomSize.y/12, 0), (int) random(numItems)));
       break;
 
     case 3:
@@ -107,12 +106,7 @@ class Room
   }
 
   void display()
-  { 
-    noFill();
-    stroke(255);
-
-    box(roomSize.x, roomSize.y, roomSize.z);
-
+  {
     pushMatrix();
 
     translate(0, roomSize.y/2, 0);
