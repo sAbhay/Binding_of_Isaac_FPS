@@ -6,18 +6,21 @@ class Item
   private int select;
   private float rot;
 
-  private Outline[] o = new Outline[numItems];
+  private ItemOutline[] o = new ItemOutline[numItems];
+
+  private int frame;
+  private boolean picked;
 
   Item(PVector _pos, int _select)
   {
     pos = _pos;
 
-    o[0] = new Outline("Transcendence", 40, 0, 0, 0, 0);
-    o[1] = new Outline("Dinner", 40, 1, 2, 0, 0);
-    o[2] = new Outline("Blood_of_the_Martyr", 40, 2, 1, 0, 0);
-    o[3] = new Outline("Sad_Onion", 35, 3, 100, 0, 0);
-    o[4] = new Outline("Torn_Photo", 40, 3, 100, 4, 2);
-    o[5] = new Outline("Growth_Hormones", 10, 4, 1, 2, 1);
+    o[0] = new ItemOutline("Transcendence", 40, 0, 0, 0, 0);
+    o[1] = new ItemOutline("Dinner", 40, 1, 2, 0, 0);
+    o[2] = new ItemOutline("Blood_of_the_Martyr", 40, 2, 1, 0, 0);
+    o[3] = new ItemOutline("Sad_Onion", 35, 3, 100, 0, 0);
+    o[4] = new ItemOutline("Torn_Photo", 40, 3, 100, 4, 2);
+    o[5] = new ItemOutline("Growth_Hormones", 10, 4, 1, 2, 1);
 
     select = _select;
     name = o[select].name;
@@ -28,18 +31,13 @@ class Item
     rot = 0;
   }
 
-  public boolean pick()
+  private void display()
   {
     if ((player.pos.x - player.size.x/2 >= pos.x - 40 || player.pos.x + player.size.x/2 >= pos.x - 40) && (player.pos.x- player.size.x/2 <= pos.x + 40 || player.pos.x <= pos.x + 40) && (player.pos.z + player.size.z/2 >= pos.z - 40 || player.pos.z - player.size.z/2 >= pos.z - 40) && (player.pos.z - player.size.z/2 <= pos.z + 40 || player.pos.z + player.size.z/2 <= pos.z + 40))
     {
-      return true;
+      picked = true;
     }
-
-    return false;
-  }
-
-  private void display()
-  {
+    
     pushMatrix();
 
     translate(pos.x, pos.y, pos.z);
@@ -130,9 +128,31 @@ class Item
     }
   }
 
-  void update()
+  public void name()
+  {    
+    frame++;
+
+    if (frame < frameRate*2)
+    {
+      cam.beginHUD();
+
+      fill(0);
+      rect(width/2, height/2, width, height/10);
+      textSize(height/20);
+
+      String n = name;
+
+      n = n.replaceAll("_", " ");
+
+      fill(255);
+      text(n, width/2, height/2 + height/40);
+
+      cam.endHUD();
+    }
+  }
+  
+  public int getFrame()
   {
-    display();
-    if (pick()) changeStat();
+   return frame; 
   }
 }

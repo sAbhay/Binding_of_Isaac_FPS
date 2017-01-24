@@ -18,6 +18,9 @@ class Player
 
   private float maxHealth;
 
+  private boolean hit;
+  private int frame = 0;
+
   Player(PVector _size, float _damage, float _speed, float _shotSpeed, float _tears, float _range, float _tearSize, float _health)
   {
     size = _size;
@@ -61,10 +64,40 @@ class Player
   {
     if (pos.x >= enemy.pos.x - enemy.size.x/2 && pos.x <= enemy.pos.x + enemy.size.x/2 && pos.y >= enemy.pos.y - enemy.size.y/2 && pos.y <= enemy.pos.y + enemy.size.y/2 && pos.z >= enemy.pos.z - enemy.size.z/2 && pos.z <= enemy.pos.z + enemy.size.z/2)
     {
-      pos.x += enemy.size.x*4;
-      pos.z += enemy.size.z*4;
+      if (!hit) health -= enemy.damage;
 
-      health -= enemy.damage;
+      hit = true;
+    }
+
+    if (hit)
+    {
+      frame++;
+
+      if (frame < frameRate/2)
+      {
+        cam.beginHUD();
+
+        fill(255, 0, 0, 100);
+        rect(width/2, height/2, width, height);
+
+        cam.endHUD();
+      }
+
+      if (frame < frameRate*2)
+      {
+        cam.beginHUD();
+
+        fill(255, 50);
+        rect(width/2, height/2, width, height);
+
+        cam.endHUD();
+      }
+
+      if (frame >= frameRate*2)
+      {
+        hit = false;
+        frame = 0;
+      }
     }
   }
 
@@ -86,7 +119,40 @@ class Player
       if (enemy.b.get(i).pos.z >= pos.z - size.z/2 && enemy.b.get(i).pos.z <= pos.z + size.z/2 && enemy.b.get(i).pos.x >= pos.x - size.x/2 && enemy.b.get(i).pos.x <= pos.x + size.x/2 && enemy.b.get(i).pos.y >= pos.y - size.y/2 && enemy.b.get(i).pos.y <= pos.y + size.y/2)
       {
         enemy.b.remove(i);
-        health -= enemy.damage;
+        if (!hit) health -= enemy.damage;
+
+        hit = true;
+      }
+    }
+
+    if (hit)
+    {
+      frame++;
+
+      if (frame < frameRate/2)
+      {
+        cam.beginHUD();
+
+        fill(255, 0, 0, 50);
+        rect(width/2, height/2, width, height);
+
+        cam.endHUD();
+      }
+
+      if (frame < frameRate*2)
+      {
+        cam.beginHUD();
+
+        fill(255, 50);
+        rect(width/2, height/2, width, height);
+
+        cam.endHUD();
+      }
+
+      if (frame >= frameRate*2)
+      {
+        hit = false;
+        frame = 0;
       }
     }
   }
@@ -126,7 +192,7 @@ class Player
   {
     return tears;
   }
-  
+
   void setTears(float _tears)
   {
     tears = _tears;
@@ -156,32 +222,32 @@ class Player
   {
     damage = _damage;
   }
-  
+
   float getTearSize()
   {
-   return tearSize; 
+    return tearSize;
   }
-  
+
   void setTearSize(float _tearSize)
   {
-   tearSize = _tearSize; 
+    tearSize = _tearSize;
   }
-  
+
   float getShotSpeed()
   {
-   return shotSpeed; 
+    return shotSpeed;
   }
-  
+
   void setShotSpeed(float _shotSpeed)
   {
     shotSpeed = _shotSpeed;
   }
-  
+
   float getSpeed()
   {
     return speed;
   }
-  
+
   void setSpeed(float _speed)
   {
     speed = _speed;

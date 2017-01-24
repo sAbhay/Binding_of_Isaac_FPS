@@ -17,6 +17,9 @@ Floor floor;
 int prs = 0; // player room up, determines which the first value of the room the player is in in the 2D array map
 int pru = 1; // player room side, determines which the second value of the room the player is in in the 2D array map
 
+IntList prss = new IntList();
+IntList prus = new IntList();
+
 int time;
 
 boolean flying = false;
@@ -27,6 +30,9 @@ void setup()
 {
   fullScreen(P3D);
   noStroke();
+
+  rectMode(CENTER);
+  textAlign(CENTER);
 
   cam = new QueasyCam(this, 0.01f, 1415f);
   player = new Player(new PVector(50, 75, 50), 1, 2, 10, 500, 750, 5, 6);
@@ -40,6 +46,9 @@ void setup()
 
   doorTexture[0] = loadImage("closedDoor.png");
   doorTexture[1] = loadImage("openDoor.png");
+
+  prss.append(prs);
+  prus.append(pru);
 
   floor = new Floor();
 
@@ -70,47 +79,27 @@ void draw()
 
   if (player.health <= 0) background(255, 0, 0);
 
+  cam.beginHUD();
+
   for (int i = 0; i < player.getMaxHealth(); i++)
-  {
-    PVector forward = player.getTarget();
-
-    pushMatrix();
-
-    translate(forward.x, forward.y, forward.z);
-
-    pushMatrix();
-
-    translate(i*0.1 - 0.5, -0.4, 0);
-
-    fill(0, 0, 0, 100);
-    noStroke();
-    box(0.06);
-
-    popMatrix();
-
-    popMatrix();
+  { 
+    fill(0, 200);
+    rect(i * 50 + 25, 25, 25, 25);
   }
 
   for (int i = 0; i < player.health; i++)
-  {
-    PVector forward = player.getTarget();
-
-    pushMatrix();
-
-    translate(forward.x, forward.y, forward.z);
-
-    pushMatrix();
-
-    translate(i*0.1 - 0.5, -0.4, 0);
-
-    fill(255, 0, 0, 100);
-    noStroke();
-    box(0.06);
-
-    popMatrix();
-
-    popMatrix();
+  { 
+    fill(255, 0, 0);
+    rect(i * 50 + 25, 25, 25, 25);
   }
+
+  fill(255);
+  rect(width/2, height/2, 3, 15);
+  rect(width/2, height/2, 15, 3);
+
+  floor.floorMap();
+
+  cam.endHUD();
 
   fill(255);
 
@@ -125,6 +114,15 @@ void draw()
 
     time += delay;
   }
+  
+  cam.beginHUD();
+  
+  fill(128, 128 - (player.getHealth()/player.getMaxHealth()) * 128);
+  rect(width/2, height/2, width, height);
+  
+  cam.endHUD();
+  
+  fill(255);
 }
 
 void mousePressed()

@@ -48,14 +48,14 @@ class Room
     case 1:
       enemyCount = (int) random(5, 10);
 
-      drop = (int) random(40);
+      drop = (int) random(30);
       if (drop < 6) 
       {
         h.add(new Heart(0));
-      } else if (drop > 6 && drop <= 9) 
+      } else if (drop >= 6 && drop < 9) 
       {
         h.add(new Heart(1));
-      } else if (drop == 10) 
+      } else if (drop == 9) 
       {
         h.add(new Heart(2));
       }
@@ -156,7 +156,8 @@ class Room
       if (enemyCount <= 0)
       {
         d[i].open = true;
-        cleared = true;
+        
+        if(type == 1) cleared = true;
 
         for (int j = 0; j < h.size(); j++)
         {
@@ -209,18 +210,19 @@ class Room
 
     for (int i = 0; i < items.size(); i++)
     { 
-      items.get(i).display();
+      if(items.get(i).picked == false) items.get(i).display();
 
-      if (items.get(i).pick()) 
+      if (items.get(i).picked) 
       {
-        items.get(i).changeStat();
+        items.get(i).name();
+        if(items.get(i).getFrame() == 1) items.get(i).changeStat();
 
         if (items.get(i).name == "Transcendence")
         {
           flying = true;
         }
 
-        items.remove(i);
+        if(items.get(i).getFrame() >= 120) items.remove(i);
       }
     }
   }
@@ -251,5 +253,10 @@ class Room
   int getIndexUp()
   {
    return indexUp; 
+  }
+  
+  int getType()
+  {
+   return type; 
   }
 }

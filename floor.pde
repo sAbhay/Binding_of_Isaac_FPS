@@ -5,8 +5,8 @@ class Floor
     {1, 2, 1, 1, 1}, 
     {0, 1, 0, 0, 1}, 
     {1, 1, 1, 1, 1}, 
-    {1, 0, 0, 1, 0},
-    {1, 2, 1, 1, 1},
+    {1, 0, 0, 1, 0}, 
+    {1, 2, 1, 1, 1}, 
     {0, 1, 0, 1, 0}};
 
   private ArrayList<Room> r = new ArrayList<Room>();
@@ -27,8 +27,6 @@ class Floor
 
   void update()
   {
-    floorMap();
-
     for (int i = 0; i < r.size(); i++)
     {
       if (r.get(i).playerInside()) r.get(i).display();
@@ -72,21 +70,14 @@ class Floor
 
   void floorMap()
   {
-    PVector mapPos = new PVector();
-    mapPos = PVector.add(cam.position, cam.getForward());
-
-    pushMatrix();
-
-    translate(mapPos.x, mapPos.y, mapPos.z);
-
-    rotateZ(radians(cam.tilt));
-
     for (Room room : r)
     {
-      pushMatrix();
-
-      translate(room.getIndexSide() * 0.05 + 0.4, room.getIndexUp() * 0.05 - 0.4, 0);
-
+      //for (int i = 0; i < prss.size(); i++)
+      //{
+      //for (int j = 0; j < prus.size(); j++)
+      //{
+      //if ((room.getIndexSide() == prus.get(i) + 1 && room.getIndexUp() == prus.get(j)) || (room.getIndexSide() == prus.get(i) - 1 && room.getIndexUp() == prss.get(j)) || (room.getIndexSide() == prus.get(i) && room.getIndexUp() == prss.get(j) + 1) || (room.getIndexSide() == prus.get(i) && room.getIndexUp() == prss.get(j) - 1) || (room.getIndexSide() == prus.get(i) && room.getIndexUp() == prss.get(j)))
+      //{
       fill(100, 128);
 
       if (room.cleared)
@@ -94,13 +85,13 @@ class Floor
         if (room.hearts())
         {
           fill(255, 0, 0);
-          box(0.025);
+          rect(room.getIndexSide() * 25 + width - map[0].length * 25 - 37.5, room.getIndexUp() * 25 + 37.5, 10, 10);
         }
 
-        if (room.type == 2)
+        if (room.getType() == 2)
         {
           fill(255, 255, 0);
-          box(0.03);
+          rect(room.getIndexSide() * 25 + width - map[0].length * 25 - 37.5, room.getIndexUp() * 25 + 37.5, 10, 10);
         }
 
         fill(200, 128);
@@ -111,11 +102,10 @@ class Floor
         fill(255, 200);
       }
 
-      box(0.05);
-
-      popMatrix();
+      rect(room.getIndexSide() * 25 + width - map[0].length * 25 - 37.5, room.getIndexUp() * 25 + 37.5, 25, 25);
+    //}
+    //}
+    //}
     }
-
-    popMatrix();
   }
 }

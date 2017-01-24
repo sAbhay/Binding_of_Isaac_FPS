@@ -108,6 +108,9 @@ class Door
       if (player.pos.x >= pos.x - roomSize.x/5 && player.pos.x <= pos.x + roomSize.x/5 && player.pos.z >= pos.z - 10 && player.pos.z <= pos.z + 10)
       {
         prs--;
+        
+        prss.append(prs);
+        prus.append(pru);
 
         player.pos.z = -roomSize.z/2 + player.size.z;
       }
@@ -118,7 +121,10 @@ class Door
 
       if (player.pos.x >= pos.x - roomSize.x/5 && player.pos.x <= pos.x + roomSize.x/5 && player.pos.z >= pos.z - 10 && player.pos.z <= pos.z + 10)
       {
-        prs++;
+        prs++; 
+
+        prss.append(prs);
+        prus.append(pru);
 
         player.pos.z = roomSize.z/2 + player.size.z;
       }
@@ -131,6 +137,9 @@ class Door
       {
         pru--;
 
+        prss.append(prs);
+        prus.append(pru);
+        
         player.pos.x = 0;
         player.pos.x = roomSize.x/2 - player.size.x;
       }
@@ -143,6 +152,9 @@ class Door
       {
         pru++;
 
+        prss.append(prs);
+        prus.append(pru);
+        
         player.pos.x = -roomSize.x/2 + player.size.x;
       }
 

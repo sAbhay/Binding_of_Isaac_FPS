@@ -1,4 +1,4 @@
-class Outline // outline for stat-changing items
+class ItemOutline // outline for stat-changing items
 {
   private int statSelect;
   private float change;
@@ -7,7 +7,7 @@ class Outline // outline for stat-changing items
   private float secondaryChange;
   private int scale;
   
-  Outline(String _name, int _scale, int _statSelect, float _changeValue, int _secondary, float _secondaryChange)
+  ItemOutline(String _name, int _scale, int _statSelect, float _changeValue, int _secondary, float _secondaryChange)
   {
     name = _name;
     scale = _scale;
