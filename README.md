@@ -1,5 +1,11 @@
 # U3_UnitProject_Abhay
 The Binding of Isaac FPS
+<h1>Description </h1>
+<h2>Inspiration </h2>
+<p>This game is based off of the Binding of Isaac Rebirth and its DLCs. It is an first person shooter version of the game, or rather, is based off of it. </p>
+<h2>What Is It? </h2>
+<p>Rather than explain the whole game, here is the link to the Wikipedia for the Binding of Isaac : https://en.wikipedia.org/wiki/The_Binding_of_Isaac_(video_game). In my game, the player needs to move from room to room, killing enemies and picking up items. At the end of each floor, there is a boss, whom the player needs to kill in order to progress. </p>
+<br>
 <h1>Milestones</h1>
 <h2>Milestone 1 : November 18th</h2>
 <ul>
