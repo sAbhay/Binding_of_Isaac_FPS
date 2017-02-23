@@ -27,11 +27,14 @@ public class QueasyCam {
   private Point mouse;
   private Point prevMouse;
   private HashMap<Character, Boolean> keys;
+  
+  private final PMatrix3D originalMatrix;
 
   public QueasyCam(PApplet applet, float near, float far){
     this.applet = applet;
     applet.registerMethod("draw", this);
     applet.registerMethod("keyEvent", this);
+    this.originalMatrix = applet.getMatrix((PMatrix3D)null);
     
     try {
       robot = new Robot();
@@ -144,5 +147,24 @@ public class QueasyCam {
   
   public PVector getPos(){
     return position;
+  }
+  
+  public void setSensitivity(float s)
+  {
+    sensitivity = s;
+  }
+  
+  public void beginHUD()
+  {
+   g.pushMatrix();
+   g.hint(DISABLE_DEPTH_TEST);
+   g.resetMatrix();
+   g.applyMatrix(originalMatrix);
+  }
+  
+  public void endHUD()
+  {
+    g.hint(ENABLE_DEPTH_TEST);
+    g.popMatrix();
   }
 }

@@ -9,8 +9,10 @@ class Room
 
   private ArrayList<RedFly> rf = new ArrayList<RedFly>();
   private ArrayList<Pooter> p = new ArrayList<Pooter>();
+  private ArrayList<Gaper> g = new ArrayList<Gaper>();
 
   private int enemyCount;
+  private int bossCount;
 
   private ArrayList<Heart> h = new ArrayList<Heart>();
 
@@ -46,8 +48,9 @@ class Room
     switch(type)
     {
     case 1:
-      enemyCount = (int) random(5, 10);
-
+    enemyCount = (int) random(5, 10);
+    bossCount = 0;
+    
       drop = (int) random(30);
       if (drop < 6) 
       {
@@ -65,29 +68,42 @@ class Room
 
     case 2:
       enemyCount = 0;
+      bossCount = 0;
       cleared = true;
 
-      items.add(new Item(new PVector(0, roomSize.y/12, 0), (int) random(numItems)));
+      items.add(new Item(new PVector(0, roomSize.y/12, 0), (int) random(numItems), 0));
       break;
 
     case 3:
       enemyCount = 0;
+      bossCount = 0;
       cleared = true;
+      break;
+      
+    case 4:
+      enemyCount = 0;
+      bossCount = 1;
       break;
     }
 
-    float ratio = random(0.33, 0.66);
+    float ratio = random(0, 0.66);
     int nrf = (int) (ratio * enemyCount); // number of red flies
-    int np = (int) ((1 - ratio) * enemyCount);
+    int np = (int) ((0.66 - ratio) * enemyCount);
+    int ng = (int) (0.33 * enemyCount);
 
     for (int i = 0; i < nrf; i++)
     {
-      rf.add(new RedFly(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(20, 20, 20), 2, 1, "fly.obj"));
+      rf.add(new RedFly(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/2, roomSize.y/2), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(20, 20, 20), 10, 1));
     }
 
     for (int i = 0; i < np; i++)
     {
-      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/3, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 3, 1, 2000, "Pooter.obj"));
+      p.add(new Pooter(new PVector(random(-roomSize.x/2, roomSize.x/2), random(-roomSize.y/3, 0), random(-roomSize.z/2, roomSize.z/2)), 2, new PVector(30, 30, 30), 10, 1, 2000));
+    }
+    
+    for (int i = 0; i < ng; i++)
+    {
+      g.add(new Gaper(new PVector(random(-roomSize.x/2, roomSize.x/2), roomSize.y/3, random(-roomSize.z/2, roomSize.z/2)), 3, new PVector(60, 180, 60), 10, 1, 1000));
     }
 
     for (int i = 0; i < (int) random(10); i++)
@@ -149,7 +165,7 @@ class Room
 
     popMatrix();
 
-    enemyCount = rf.size() + p.size();
+    enemyCount = rf.size() + p.size() + g.size();
 
     for (int i = 0; i < d.length; i++)
     {
@@ -199,6 +215,15 @@ class Room
       p.get(i).update();
 
       if (p.get(i).killed) p.remove(i);
+    }
+    
+    for (int i = 0; i < g.size(); i++)
+    { 
+      if (dist(player.pos.x, player.pos.y, player.pos.z, g.get(i).pos.x, g.get(i).pos.y, g.get(i).pos.z) < 500) g.get(i).shoot(player.getPos());
+      g.get(i).move(player.getPos());
+      g.get(i).update();
+
+      if (g.get(i).killed) g.remove(i);
     }
 
     for (int i = 0; i < r.size(); i++)

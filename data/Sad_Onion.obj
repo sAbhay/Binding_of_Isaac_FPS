@@ -1,6 +1,6 @@
 # Blender v2.78 (sub 0) OBJ File: 'Sad Onion.blend'
 # www.blender.org
-mtllib Sad Onion.mtl
+mtllib Sad_Onion.mtl
 o BezierCurve
 v 0.109748 -2.619654 -0.238828
 v 0.112177 -2.598937 -0.257930

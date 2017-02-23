@@ -5,11 +5,12 @@ class Gaper extends Enemy
   
   private float y;
   
-  Gaper(PVector _pos, float _speed, PVector _size, float _health, float _damage, String _model)
+  Gaper(PVector _pos, float _speed, PVector _size, float _health, float _damage, int _fireRate)
   {
-    super(_pos, _speed, _size, _health, _damage, _model, new PVector(1.5, 3, 1.5));
+    super(_pos, _speed, _size, _health, _damage, "gaper.obj", new PVector(3, 3, 3));
     
     y = _pos.y;
+    fireRate = _fireRate;
   }
 
   void move(PVector _target)

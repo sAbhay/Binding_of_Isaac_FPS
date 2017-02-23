@@ -39,7 +39,7 @@ class Player
 
   void shoot()
   {
-    b.add(new Bullet(cam.position, target, shotSpeed, range, tearSize, 0));
+    b.add(new Bullet(cam.position, target, 10 * shotSpeed, range, tearSize, 0));
   }
 
   void update()
@@ -247,10 +247,15 @@ class Player
   {
     return speed;
   }
+  
+  float getRange()
+  {
+    return range;
+  }
 
   void setSpeed(float _speed)
   {
     speed = _speed;
-    cam.speed = speed;
+    cam.speed = 2 * speed;
   }
 }

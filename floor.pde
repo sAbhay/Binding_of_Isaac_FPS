@@ -1,13 +1,13 @@
 class Floor
 {
-  private int map[][] = 
-    {{0, 3, 0, 0, 1}, 
+  private int map[][] = {
+    {0, 3, 0, 0, 1}, 
     {1, 2, 1, 1, 1}, 
     {0, 1, 0, 0, 1}, 
     {1, 1, 1, 1, 1}, 
     {1, 0, 0, 1, 0}, 
     {1, 2, 1, 1, 1}, 
-    {0, 1, 0, 1, 0}};
+    {0, 1, 0, 4, 0}};
 
   private ArrayList<Room> r = new ArrayList<Room>();
 
@@ -78,6 +78,8 @@ class Floor
       //{
       //if ((room.getIndexSide() == prus.get(i) + 1 && room.getIndexUp() == prus.get(j)) || (room.getIndexSide() == prus.get(i) - 1 && room.getIndexUp() == prss.get(j)) || (room.getIndexSide() == prus.get(i) && room.getIndexUp() == prss.get(j) + 1) || (room.getIndexSide() == prus.get(i) && room.getIndexUp() == prss.get(j) - 1) || (room.getIndexSide() == prus.get(i) && room.getIndexUp() == prss.get(j)))
       //{
+        stroke(255);
+        
       fill(100, 128);
 
       if (room.cleared)
@@ -103,9 +105,11 @@ class Floor
       }
 
       rect(room.getIndexSide() * 25 + width - map[0].length * 25 - 37.5, room.getIndexUp() * 25 + 37.5, 25, 25);
-    //}
-    //}
-    //}
+      
+      noStroke();
+      //}
+      //}
+      //}
     }
   }
 }

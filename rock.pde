@@ -11,7 +11,7 @@ class Rock
     size = (int) (roomSize.x/10 + roomSize.z/10)/2;
     
     rock = loadShape("rock.obj");
-    rock.scale(size/3);
+    rock.scale(size/2, size, size/2);
   }
 
   void display()

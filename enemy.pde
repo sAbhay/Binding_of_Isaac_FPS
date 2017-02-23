@@ -13,11 +13,14 @@ class Enemy // base enemy class
   private float health;
   public float damage;
   
+  private PVector forward;
+  
   public ArrayList<Bullet> b = new ArrayList<Bullet>();
 
   Enemy(PVector _pos, float _speed, PVector _size, float _health, float _damage, String model, PVector _scale)
   {
     pos = _pos;
+    //forward = 
     
     dir = new PVector();
     
@@ -41,6 +44,7 @@ class Enemy // base enemy class
     shape(enemy);
     
     //noFill();
+    //stroke(255);
     //box(size.x, size.y, size.z);
 
     popMatrix();

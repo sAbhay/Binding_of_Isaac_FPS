@@ -1,4 +1,4 @@
-QueasyCam cam; //<>//
+QueasyCam cam;
 
 Player player;
 
@@ -11,11 +11,13 @@ PVector roomSize = new PVector(1000, 500, 1000);
 PImage texture[] = new PImage[2];
 PImage roomTexture[] = new PImage[1];
 PImage doorTexture[] = new PImage[2];
+PImage statIcon[] = new PImage[5]; 
 
 Floor floor;
 
 int prs = 0; // player room up, determines which the first value of the room the player is in in the 2D array map
 int pru = 1; // player room side, determines which the second value of the room the player is in in the 2D array map
+
 
 IntList prss = new IntList();
 IntList prus = new IntList();
@@ -26,6 +28,8 @@ boolean flying = false;
 
 int numItems = 6; // number of items
 
+int screenState;
+
 void setup() 
 {
   fullScreen(P3D);
@@ -33,11 +37,14 @@ void setup()
 
   rectMode(CENTER);
   textAlign(CENTER);
+  imageMode(CENTER);
 
   cam = new QueasyCam(this, 0.01f, 1415f);
-  player = new Player(new PVector(50, 75, 50), 1, 2, 10, 500, 750, 5, 6);
+  cam.setSensitivity(1f);
+  
+  player = new Player(new PVector(50, 75, 50), 3.5, 1, 1, 10, 750, 5, 6);
 
-  cam.speed = player.speed;
+  cam.speed = 2 * player.speed;
 
   texture[0] = loadImage("tear.png");
   texture[1] = loadImage("bloodTear.png");
@@ -46,6 +53,17 @@ void setup()
 
   doorTexture[0] = loadImage("closedDoor.png");
   doorTexture[1] = loadImage("openDoor.png");
+  
+  statIcon[0] = loadImage("Damage_Stat_Icon.png");
+  statIcon[1] = loadImage("Speed_Stat_Icon.png");
+  statIcon[2] = loadImage("Tears_Stat_Icon.png");
+  statIcon[3] = loadImage("Shot_Speed_Stat_Icon.png");
+  statIcon[4] = loadImage("Range_Stat_Icon.png");
+
+  for(int i = 0; i < statIcon.length; i++)
+  {
+   statIcon[i].resize(50, 50); 
+  }
 
   prss.append(prs);
   prus.append(pru);
@@ -98,6 +116,26 @@ void draw()
   rect(width/2, height/2, 15, 3);
 
   floor.floorMap();
+  
+  fill(128, 128 - (player.getHealth()/player.getMaxHealth()) * 128);
+  rect(width/2, height/2, width, height);
+  
+  fill(255);
+  
+  textAlign(LEFT);
+  textSize(20);
+  text(player.getDamage(), width/14.4, height/3);
+  text(player.getSpeed(), width/14.4, height/2.4);
+  text(player.getTears(), width/14.4, height/2);
+  text(player.getShotSpeed(), width/14.4, height/1.714285);
+  text(player.getRange(), width/14.4, 2*height/3);
+  
+  for(int i = 0; i < statIcon.length; i++)
+  {
+    image(statIcon[i], width/28.8, height/3 + i * 75);
+  }
+  
+  textAlign(CENTER);
 
   cam.endHUD();
 
@@ -110,19 +148,10 @@ void draw()
       player.shoot();
     }
 
-    float delay = player.getTears();
+    float delay = player.getTears() * 60;
 
     time += delay;
   }
-  
-  cam.beginHUD();
-  
-  fill(128, 128 - (player.getHealth()/player.getMaxHealth()) * 128);
-  rect(width/2, height/2, width, height);
-  
-  cam.endHUD();
-  
-  fill(255);
 }
 
 void mousePressed()
